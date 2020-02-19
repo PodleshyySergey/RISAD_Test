@@ -70,7 +70,6 @@ public class CreateOPRPRstInDev11Test {
         driver.findElement(By.id("Password")).sendKeys("Orator16");
         driver.findElement(By.name("button")).click();
         driver.findElement(By.xpath("//li[@id='menu-item-planning-pl']/span")).click();
-//        Добавил коммент чтобы посмотреть как это будет на GitHub
 //        driver.findElement(By.xpath("//div[@id='container']//div[@class='flex-item header']//span[@class='k-select']")).click();
 //        driver.findElement(By.linkText("2027")).click();
 //        driver.findElement(By.xpath("//input[@id='program_year']")).clear();
