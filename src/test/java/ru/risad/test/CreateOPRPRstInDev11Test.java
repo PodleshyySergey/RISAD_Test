@@ -72,11 +72,15 @@ public class CreateOPRPRstInDev11Test {
         driver.findElement(By.xpath("//li[@id='menu-item-planning-pl']/span")).click();
 //        driver.findElement(By.xpath("//div[@id='container']//div[@class='flex-item header']//span[@class='k-select']")).click();
 //        driver.findElement(By.linkText("2027")).click();
-        driver.findElement(By.xpath("//input[@id='program_year']")).clear();
-//        driver.findElement(By.xpath("//input[@id='program_year']")).click();
+//        driver.findElement(By.xpath("//input[@id='program_year']")).clear();
+        driver.findElement(By.xpath("//input[@id='program_year']")).click();
+        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys("2029");
 //        driver.findElement(By.xpath("//input[@id='program_year']")).click();
-        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.ENTER);
+//        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.ENTER);
 
         driver.findElement(By.id("CMRRoadRepair")).click();
         vars.put("window_handles", driver.getWindowHandles());
