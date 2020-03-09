@@ -4,11 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,7 @@ public class TestBase {
     String baseURL = "https://172.16.10.57:7443/";
     private Map<String, Object> vars;
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -26,7 +27,7 @@ public class TestBase {
         vars = new HashMap<String, Object>();
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
@@ -45,11 +46,11 @@ public class TestBase {
         return whNow.iterator().next();
     }
 
-    protected void choiseProgramWork() {
-        driver.findElement(By.id("CMRRoadRepair")).click();
+    protected void choiseProgramWork(String nameProgramWork) {
+        driver.findElement(By.id(nameProgramWork)).click();
     }
 
-    protected void createObjectProgramWork() {
+    protected void createObjectProgramWorkInDev() {
 
         vars.put("window_handles", driver.getWindowHandles());
         driver.findElement(By.xpath("//div[@id='btns-edits']/button")).click();
@@ -59,7 +60,7 @@ public class TestBase {
         driver.findElement(By.xpath("//div[@id='programobjectobject']/div/div/div[2]/span/span/span[3]/span")).click();
         driver.findElement(By.cssSelector(".k-i-expand")).click();
         driver.findElement(By.xpath("//div[5]/div/div[1]/ul/li/ul/li[3]/div/span")).click();
-        driver.findElement(By.id("ta-name")).click();
+        choiseProgramWork("ta-name");
         driver.findElement(By.id("ta-name")).sendKeys("Тест 003");
         driver.findElement(By.xpath("//div[@id='programobjectobject']/div/div[5]/div[2]/span/span/span[2]/span")).click();
         driver.findElement(By.xpath("//li[contains(.,'Устройство поверхностной обработки')]")).click();
@@ -131,5 +132,21 @@ public class TestBase {
         driver.findElement(By.id("Password")).click();
         driver.findElement(By.id("Password")).sendKeys(userPassword);
         driver.findElement(By.name("button")).click();
+    }
+
+    protected void createProgramWorkInSelectedYear() {
+        if (isElementPresent(By.xpath("//div[@id='dialog']"))) {
+            driver.findElement(By.xpath("//button[contains(.,'Ok')]")).click();
+        }
+
+    }
+
+    public boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+           return false;
+        }
     }
 }
