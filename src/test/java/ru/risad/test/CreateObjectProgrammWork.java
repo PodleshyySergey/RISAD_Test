@@ -13,7 +13,7 @@ public class CreateObjectProgrammWork extends TestBase {
         choiceYear("2020");
         choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadRepair" - еще одна программа работ, в которой сохраняются данные.
         createProgramWorkIfNotCreatedLater();
-        createObjectProgramWorkInDev();
+        createObjectProgramWork();
     }
 
 //    @Test

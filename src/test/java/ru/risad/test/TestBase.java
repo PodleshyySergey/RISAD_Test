@@ -45,16 +45,17 @@ public class TestBase {
         return whNow.iterator().next();
     }
 
-    protected void choiseProgramWork(String nameProgramWork) {
-        driver.findElement(By.id(nameProgramWork)).click();
+    //Нужно изменить, чтобы действительно в качестве параметра передавалось название программы работ, а не id
+    protected void choiseProgramWork(String idProgramWork) {
+        driver.findElement(By.id(idProgramWork)).click();
     }
 
-    protected void createObjectProgramWorkInDev() {
+    protected void createObjectProgramWork() {
 
         pushCreateOPRandSaveWindow();
-        fillFormOPRtop();
+        fillFormOPRtopPIR("ФКУ Упрдор «Енисей»", "Республика Тыва");
         fillDescriptionAdjustment();
-        fillSubarticle();
+        fillSubarticleFirst();
         createObjectWork();
         saveOPRandCloseWindow();
 
@@ -91,7 +92,8 @@ public class TestBase {
         driver.findElement(By.xpath("//button[contains(.,'Да')]")).click();																				        //Обращение к кнопке сохранения объекта работ.
     }
 
-    private void fillSubarticle() {
+    //метод для добавления подстатьи без обращения к кнопке добавления (т.е. первая подстатья, грид которой сразу отображается на форме создания объекта программы работ)
+    private void fillSubarticleFirst() {
         //ДОБАВЛЕНИЕ ПОДСТАТЕЙ В ОБЪЕКТ ПРОГРАММЫ РАБОТ
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']")).click(); 			//Разворачивание списка подстатей
         driver.findElement(By.xpath("//li[contains(.,'226')]")).click();																						//Выбор подстатьи
@@ -114,10 +116,10 @@ public class TestBase {
         driver.findElement(By.xpath("//div[3]/button")).click();																			//Обращение к кнопке "Ок" на форме добавления описания корректировки.
     }
 
-    private void fillFormOPRtop() {
+    private void fillFormOPRtopPIR(final String disclosureFKU, final String choiceRegion) {
         driver.findElement(By.xpath("//div[contains(text(),'Регион')]/..//span[@class='k-dropdown-wrap k-state-default']")).click();    //Разворачивание списка "Регион"
-        driver.findElement(By.xpath("//span[contains(text(),'ФКУ Упрдор «Енисей»')]/../span[@class='k-icon k-i-expand']")).click();     //Разворачивание ФКУ
-        driver.findElement(By.xpath("//span[contains(.,'Республика Тыва')]")).click();												    //Выбор региона
+        driver.findElement(By.xpath("//span[contains(text(),'" + disclosureFKU + "')]/../span[@class='k-icon k-i-expand']")).click();     //Разворачивание ФКУ
+        driver.findElement(By.xpath("//span[contains(.,'" + choiceRegion + "')]")).click();												    //Выбор региона
         driver.findElement(By.xpath("//div[contains(text(),'Регион')]")).click();														//Доп.клик для скрытия выпадающего списка "Регион"
         driver.findElement(By.id("ta-name")).click();																					//Позиционирование на поле для ввода Наименования объекта
         driver.findElement(By.id("ta-name")).sendKeys("Test_001"+ System.currentTimeMillis());							//Ввод наименования объекта
