@@ -6,14 +6,26 @@ import org.testng.annotations.Test;
 public class CreateObjectProgrammWorkPWstatusInDev extends TestBase {
 
     @Test
-    public void CreateOPRPRstInDev() {
+    public void testCreateOPRPRstInDev() {
         gotoResourse(baseURL);
         login("baykal01", "Orator16");
-        choiceSection();
-        choiceYear("2030");
+        choiceSection("Планирование");
+        choiceYear("2034");
         choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadRepair" - еще одна программа работ, в которой сохраняются данные.
-        createProgramWorkInSelectedYear();
+        createProgramWorkIfNotCreatedLater();
         createObjectProgramWorkInDev();
     }
+
+    @Test
+    public void testCreateOPRPRstInDev_1() {
+        gotoResourse(baseURL);
+        login("baykal01", "Orator16");
+        choiceSection("Планирование");
+        choiceYear("2030");
+        choiseProgramWork("PIRRoadRepair"); // "PIRRoadRepair" - еще одна программа работ, в которой сохраняются данные.
+        createProgramWorkIfNotCreatedLater();
+        createObjectProgramWorkInDev();
+    }
+    
 
 }

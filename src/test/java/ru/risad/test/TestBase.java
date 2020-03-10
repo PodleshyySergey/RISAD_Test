@@ -22,7 +22,7 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
     }
@@ -108,15 +108,12 @@ public class TestBase {
     protected void choiceYear(String year) {
         driver.findElement(By.xpath("//input[@id='program_year']")).click();
         driver.findElement(By.xpath("//input[@id='program_year']")).clear();
-//        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
-//        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
-//        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//input[@id='program_year']")).click();
         driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(year);
     }
 
-    protected void choiceSection() {
-        driver.findElement(By.xpath("//li[@id='menu-item-planning-pl']/span")).click();
+    protected void choiceSection(String section) {
+        driver.findElement(By.xpath("//span[contains(text(), '"+ section + "')]")).click();
     }
 
     protected void gotoResourse(String url) {
@@ -134,19 +131,14 @@ public class TestBase {
         driver.findElement(By.name("button")).click();
     }
 
-    protected void createProgramWorkInSelectedYear() {
-        if (isElementPresent(By.xpath("//div[@id='dialog']"))) {
+    protected void createProgramWorkIfNotCreatedLater() {
+        if (isElementPresent(By.xpath("//div[@id='dialog']/p[1]"))) {
             driver.findElement(By.xpath("//button[contains(.,'Ok')]")).click();
         }
 
     }
 
     public boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException e) {
-           return false;
-        }
+       return driver.findElements(locator).size() > 0;
     }
 }
