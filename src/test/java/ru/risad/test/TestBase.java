@@ -170,10 +170,11 @@ public class TestBase {
     }
 
     protected void login(String userName, String userPassword) {
-        //Закрытие сообщения "Подключение не защищено". Нужно сделать через условие наличия элемента на странице
-        driver.findElement(By.xpath("//button[@id='details-button']")).click();
-        driver.findElement(By.xpath("//a[@id='proceed-link']")).click();
-
+        //Закрытие сообщения "Подключение не защищено".
+        if (isElementPresent(By.xpath("//button[@id='details-button']"))) {
+            driver.findElement(By.xpath("//button[@id='details-button']")).click();
+            driver.findElement(By.xpath("//a[@id='proceed-link']")).click();
+        }
         driver.findElement(By.id("Username")).click();
         driver.findElement(By.id("Username")).sendKeys(userName);
         driver.findElement(By.id("Password")).click();
@@ -199,5 +200,10 @@ public class TestBase {
     protected void clickFormationOfPW() {
         driver.findElement(By.xpath("//button[@title='Сформировать']/span")).click();
         driver.navigate().refresh();
+    }
+
+    protected void logout() {
+        driver.findElement(By.xpath("//div[@class='user-panel logout item']//input[@type='submit']")).click();
+        driver.findElement(By.xpath("//a[@class='PostLogoutRedirectUri']")).click();
     }
 }

@@ -6,28 +6,26 @@ import org.testng.annotations.Test;
 public class CreateObjectProgrammWorkinPIRRoadRepair extends TestBase {
 
     @Test
-    public void atestCreateOPWbyFKUinPIRRoadRepair() {
+    public void testCreateOPWbyFKUinPIRRoadRepair() {
+        //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
         login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear("2020");
-        choiseProgramWork("PIRRoadRepair"); // "PIRRoadRepair" - еще одна программа работ, в которой сохраняются данные.
+        choiseProgramWork("PIRRoadRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
         createProgramWorkIfNotCreatedLater();
         createObjectProgramWork();
         findNameObject(nameObject);
         clickFormationOfPW();
-    }
 
-    @Test
-    public void checkCreatedOPWbyFDAinPIRRoadRepair() {
-        gotoResourse(baseURL);
+        logout();
+
+        //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
         login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear("2020");
         choiseProgramWork("PIRRoadRepair");
         findNameObject(nameObject);
     }
-
-    //---------------------------------------------------------------------------------
 
 }
