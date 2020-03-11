@@ -14,7 +14,14 @@ public class CreateObjectProgrammWorkinPIRRoadRepair extends TestBase {
         choiceYear("2020");
         choiseProgramWork("PIRRoadRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
         createProgramWorkIfNotCreatedLater();
-        createObjectProgramWork();
+//      Создание объекта программы работ
+        pushCreateOPRandSaveWindow();
+        fillFormOPRtopPIR("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", "2020");
+        addAndFillCorrection("На вновь начинаемый объект", "09.02.2020", "123");
+        fillSubArticleFirst("226", "Разработка проектной документации", "200");
+        createObjectWork("ФКУ Упрдор «Енисей»", "'Республика Тыва'", "\"Енисей\" Красноярск - Абакан - Кызыл - Чадан - Хандагайты - граница с Монголией'", "12", "111", "21", "222", "Ремонт 12.12.2012", "444", "1 категоря");
+        saveOPRandCloseWindow();
+
         findNameObject(nameObject);
         clickFormationOfPW();
 
