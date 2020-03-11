@@ -5,7 +5,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
@@ -18,7 +17,7 @@ public class TestBase {
     public WebDriver driver;
     JavascriptExecutor js;
     String baseURL = "https://172.16.10.57:7443/";
-    String nameObject = "";
+    String nameObject = "";         //переменная для сохранения имени ОПР, по которому потом будет поиск ОПР в гриде программы работ
     private Map<String, Object> vars;
 
     @BeforeMethod
@@ -120,7 +119,7 @@ public class TestBase {
         driver.findElement(By.xpath("//div[3]/button")).click();																			//Обращение к кнопке "Ок" на форме добавления описания корректировки.
     }
 
-    protected void fillFormOPRtopPIR(final String disclosureFKU, final String choiceRegion) {
+    public void fillFormOPRtopPIR(final String disclosureFKU, final String choiceRegion) {
         driver.findElement(By.xpath("//div[contains(text(),'Регион')]/..//span[@class='k-dropdown-wrap k-state-default']")).click();    //Разворачивание списка "Регион"
         driver.findElement(By.xpath("//span[contains(text(),'" + disclosureFKU + "')]/../span[@class='k-icon k-i-expand']")).click();     //Разворачивание ФКУ
         driver.findElement(By.xpath("//span[contains(.,'" + choiceRegion + "')]")).click();												    //Выбор региона
@@ -143,7 +142,7 @@ public class TestBase {
         driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
         driver.findElement(By.id("tb-endYear")).clear(); 	                                                                                                     //Очистка поля "Год окончания работ"
         driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
-        driver.findElement(By.id("tb-endYear")).sendKeys("2021");																				//Ввод значения в поле "Год окончания работ"
+        driver.findElement(By.id("tb-endYear")).sendKeys("2020");																				//Ввод значения в поле "Год окончания работ"
     }
 
     protected void pushCreateOPRandSaveWindow() {
@@ -193,8 +192,8 @@ public class TestBase {
        return driver.findElements(locator).size() > 0;
     }
 
-    protected void findNameObject() {
-        driver.findElement(By.xpath("//td[contains(.,'" + nameObject + "')]"));
+    protected void findNameObject(String nameObjectTemp) {
+        driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]"));
     }
 
     protected void clickFormationOfPW() {
