@@ -19,16 +19,25 @@ public class CreateObjectProgrammWork extends TestBase {
         clickFormationOfPW();
     }
 
-    //    @Test
-//    public void testCreateOPRPRstInDev_1() {
-//        gotoResourse(baseURL);
-//        login("baykal01", "Orator16");
-//        choiceSection("Планирование");
-//        choiceYear("2030");
-//        choiseProgramWork("PIRRoadRepair"); // "PIRRoadRepair" - еще одна программа работ, в которой сохраняются данные.
-//        createProgramWorkIfNotCreatedLater();
-//        createObjectProgramWorkInDev();
-//    }
+    @Test
+    public void testCreateOPRPR_1() {
+        gotoResourse(baseURL);
+        login("fda", "vashkulat");
+        choiceSection("Планирование");
+        choiceYear("2021");
+        choiseProgramWork("PIRRoadFullRepair");       // "PIRRoadRepair" - еще одна программа работ, в которой сохраняются данные.
+//        createProgramWorkIfNotCreatedLater();                     //если вход под учеткой "пользователь ФДА", то ожидание окна с предложением создать программу работ не имеет смысла
 
+//        createObjectProgramWork();                                //здесь функция создания ОПР заменена набором функций, которые входят в функцию создания ОПР, эти функции нужно параметризовать, либо нужно создать объект типа ОПР со всем параметрами
+        pushCreateOPRandSaveWindow();
+        fillFormOPRtopPIR("ФКУ Упрдор «Енисей»", "Республика Хакасия");
+        addAndFillCorrection();
+        fillSubArticleFirst();
+        createObjectWork();
+        saveOPRandCloseWindow();
+
+        findNameObject();
+//        clickFormationOfPW();
+    }
 
 }

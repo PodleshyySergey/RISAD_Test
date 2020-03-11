@@ -5,7 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,8 +65,8 @@ public class TestBase {
     }
 
     protected void saveOPRandCloseWindow() {
-        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button")).click();															        //Обращение к кнопке создания объекта программы работ.
-        driver.close();
+        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Создать')]")).click();															        //Обращение к кнопке создания объекта программы работ.
+//        driver.close();
         driver.switchTo().window(vars.get("root").toString());
         driver.navigate().refresh();
     }
@@ -141,7 +143,7 @@ public class TestBase {
         driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
         driver.findElement(By.id("tb-endYear")).clear(); 	                                                                                                     //Очистка поля "Год окончания работ"
         driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
-        driver.findElement(By.id("tb-endYear")).sendKeys("2020");																				//Ввод значения в поле "Год окончания работ"
+        driver.findElement(By.id("tb-endYear")).sendKeys("2021");																				//Ввод значения в поле "Год окончания работ"
     }
 
     protected void pushCreateOPRandSaveWindow() {
@@ -196,7 +198,7 @@ public class TestBase {
     }
 
     protected void clickFormationOfPW() {
-        driver.findElement(By.xpath("//button[@title='Сформировать']")).click();
+        driver.findElement(By.xpath("//button[@title='Сформировать']/span")).click();
         driver.navigate().refresh();
     }
 }
