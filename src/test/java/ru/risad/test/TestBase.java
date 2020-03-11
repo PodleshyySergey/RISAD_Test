@@ -16,6 +16,7 @@ public class TestBase {
     public WebDriver driver;
     JavascriptExecutor js;
     String baseURL = "https://172.16.10.57:7443/";
+    String nameObject = "";
     private Map<String, Object> vars;
 
     @BeforeMethod
@@ -54,20 +55,21 @@ public class TestBase {
 
         pushCreateOPRandSaveWindow();
         fillFormOPRtopPIR("ФКУ Упрдор «Енисей»", "Республика Тыва");
-        fillDescriptionAdjustment();
-        fillSubarticleFirst();
+        addAndFillCorrection();
+        fillSubArticleFirst();
         createObjectWork();
         saveOPRandCloseWindow();
 
     }
 
-    private void saveOPRandCloseWindow() {
+    protected void saveOPRandCloseWindow() {
         driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button")).click();															        //Обращение к кнопке создания объекта программы работ.
         driver.close();
         driver.switchTo().window(vars.get("root").toString());
+        driver.navigate().refresh();
     }
 
-    private void createObjectWork() {
+    protected void createObjectWork() {
         //Создание объекта работ
         driver.findElement(By.xpath("//span[contains(.,'Объекты работы')]")).click();																               //Переход на вкладку "Объекты работ"
         driver.findElement(By.id("btn-create-newobj")).click();																							           //Обращение к кнопке создания объекта работ
@@ -93,7 +95,7 @@ public class TestBase {
     }
 
     //метод для добавления подстатьи без обращения к кнопке добавления (т.е. первая подстатья, грид которой сразу отображается на форме создания объекта программы работ)
-    private void fillSubarticleFirst() {
+    protected void fillSubArticleFirst() {
         //ДОБАВЛЕНИЕ ПОДСТАТЕЙ В ОБЪЕКТ ПРОГРАММЫ РАБОТ
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']")).click(); 			//Разворачивание списка подстатей
         driver.findElement(By.xpath("//li[contains(.,'226')]")).click();																						//Выбор подстатьи
@@ -104,7 +106,7 @@ public class TestBase {
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='textBoxValueYear k-input']")).sendKeys("200");																									//Ввод значения в поле
     }
 
-    private void fillDescriptionAdjustment() {
+    protected void addAndFillCorrection() {
         //ВНЕСЕНИЕ ОПИСАНИЯ КОРРЕКТИРОВКИ
 
         driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();								//Обращение к кнопке добавления описания корректировки
@@ -116,13 +118,14 @@ public class TestBase {
         driver.findElement(By.xpath("//div[3]/button")).click();																			//Обращение к кнопке "Ок" на форме добавления описания корректировки.
     }
 
-    private void fillFormOPRtopPIR(final String disclosureFKU, final String choiceRegion) {
+    protected void fillFormOPRtopPIR(final String disclosureFKU, final String choiceRegion) {
         driver.findElement(By.xpath("//div[contains(text(),'Регион')]/..//span[@class='k-dropdown-wrap k-state-default']")).click();    //Разворачивание списка "Регион"
         driver.findElement(By.xpath("//span[contains(text(),'" + disclosureFKU + "')]/../span[@class='k-icon k-i-expand']")).click();     //Разворачивание ФКУ
         driver.findElement(By.xpath("//span[contains(.,'" + choiceRegion + "')]")).click();												    //Выбор региона
         driver.findElement(By.xpath("//div[contains(text(),'Регион')]")).click();														//Доп.клик для скрытия выпадающего списка "Регион"
+        nameObject = "Test_" + System.currentTimeMillis();                                                                              //Сохранение названия объекта в переменную для последующего проверки отображения в гриде программы работ
         driver.findElement(By.id("ta-name")).click();																					//Позиционирование на поле для ввода Наименования объекта
-        driver.findElement(By.id("ta-name")).sendKeys("Test_001"+ System.currentTimeMillis());							//Ввод наименования объекта
+        driver.findElement(By.id("ta-name")).sendKeys(nameObject);							                            //Ввод наименования объекта
         driver.findElement(By.xpath("//div[contains(text(),'Вид работ')]/..//span[@class='k-widget k-dropdown']")).click();				//Разворачивание списка "Вид работ"
         driver.findElement(By.xpath("//li[contains(.,'Устройство защитных слоев')]")).click();											//Выбор значения из списка "Устройство защитных слоев"
         driver.findElement(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Протяженность ремонтируемого покрытия (км)"
@@ -141,7 +144,7 @@ public class TestBase {
         driver.findElement(By.id("tb-endYear")).sendKeys("2020");																				//Ввод значения в поле "Год окончания работ"
     }
 
-    private void pushCreateOPRandSaveWindow() {
+    protected void pushCreateOPRandSaveWindow() {
         vars.put("window_handles", driver.getWindowHandles());
         driver.findElement(By.xpath("//div[@id='btns-edits']/button/span")).click(); 													//обращение к кнопке создания ОПР
         vars.put("win4227", waitForWindow(2000));
@@ -186,5 +189,14 @@ public class TestBase {
 
     public boolean isElementPresent(By locator) {
        return driver.findElements(locator).size() > 0;
+    }
+
+    protected void findNameObject() {
+        driver.findElement(By.xpath("//td[contains(.,'" + nameObject + "')]"));
+    }
+
+    protected void clickFormationOfPW() {
+        driver.findElement(By.xpath("//button[@title='Сформировать']")).click();
+        driver.navigate().refresh();
     }
 }
