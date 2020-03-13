@@ -2,6 +2,7 @@ package ru.risad.test;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -15,7 +16,7 @@ public class TestBase {
     public WebDriver driver;
     JavascriptExecutor js;
     String baseURL = "https://172.16.10.57:7443/";
-    String nameObject = "";         //переменная для сохранения имени ОПР, по которому потом будет поиск ОПР в гриде программы работ
+    String nameObject = "";                         //переменная для сохранения имени ОПР, по которому потом будет поиск ОПР в гриде программы работ
     String startYear = "2026";
     private Map<String, Object> vars;
 
@@ -27,7 +28,7 @@ public class TestBase {
         vars = new HashMap<String, Object>();
     }
 
-    @AfterMethod
+//    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
@@ -294,6 +295,10 @@ public class TestBase {
         driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]"));
     }
 
+    public void checkStatusObject(String nameObjectTemp, final String status) {
+        driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]/i[@title='" + status + "']"));
+    }
+
     public void openEditObject(String nameObjectTemp) {
         vars.put("window_handles", driver.getWindowHandles());
         driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]")).click();     //фокусировка на ОПР
@@ -315,5 +320,35 @@ public class TestBase {
 
     protected void pushFomationPW() {
         driver.findElement(By.xpath("//button[@title='Сформировать']")).click();
+    }
+
+    protected void fillDeleteCorrection() {
+        driver.findElement(By.id("correction-description-dialog-date")).click();										//Позиционирование на датапикере в описании корректировки
+        driver.findElement(By.id("correction-description-dialog-date")).clear();										//Очиска поля датапикера в описании корректировки
+        driver.findElement(By.id("correction-description-dialog-date")).sendKeys("12.03.2020");			//Ввод даты с клавиатуры в датапикер.
+        driver.findElement(By.id("correction-description-dialog-doc")).click();											//Позиционирование на поле ввода "Номер документа".
+        driver.findElement(By.id("correction-description-dialog-doc")).sendKeys("123");					//Ввод значения в поле "Номер документа"
+        driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+    }
+
+    protected void clickDeleteOPW(String nameObjectTemp) {
+        driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]")).click();             //фокусировка на ОПР
+        driver.findElement(By.xpath("//button[@ix='4']/span")).click();                             //обращение к кнопке редактирования ОПР
+    }
+
+    public void rightClick(final String nameObiect) {
+        WebElement element = driver.findElement(By.xpath("//td[contains(.,'" + nameObiect + "')]"));
+        element.click();
+        Actions action = new Actions(driver).contextClick(element);
+        action.build().perform();
+    }
+
+    public void selectContextItem(final String menuItem, final String submenuItem) {
+        Actions action = new Actions(driver)
+                .moveToElement(driver.findElement(By.xpath("//li[contains(.,'" + menuItem + "')]/span")))
+                .click()
+                .moveToElement(driver.findElement(By.xpath("//li/span[contains(.,'" + submenuItem + "')]")))
+                .click();
+                action.build().perform();
     }
 }

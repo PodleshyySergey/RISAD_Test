@@ -2,7 +2,7 @@ package ru.risad.test;
 
 import org.testng.annotations.Test;
 
-public class F_EditOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
+public class G_EditOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
 
     @Test
     public void testEditOPWinPIRRoadFullRepairStateInFormFKU() {

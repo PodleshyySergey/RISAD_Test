@@ -3,7 +3,7 @@ package ru.risad.test;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-public class D_FormationPWbyFKUinPIRRoadFullRepair extends TestBase {
+public class E_FormationPWbyFKUinPIRRoadFullRepair extends TestBase {
 
     @Test
     public void testFormationPWbyFKUinPIRRoadFullRepair() {
