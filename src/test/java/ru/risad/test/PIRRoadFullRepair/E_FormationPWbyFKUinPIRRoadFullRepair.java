@@ -1,7 +1,7 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadFullRepair;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
 public class E_FormationPWbyFKUinPIRRoadFullRepair extends TestBase {
 

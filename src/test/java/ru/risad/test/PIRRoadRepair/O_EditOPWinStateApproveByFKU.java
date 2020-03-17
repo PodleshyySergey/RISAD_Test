@@ -1,18 +1,19 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class O_EditOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
+public class O_EditOPWinStateApproveByFKU extends TestBase {
 
     @Test
-    public void testEditOPWinPIRRoadFullRepairStateInApproveFKU() {
+    public void testEditOPWinStateApproveByFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
         login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        choiseProgramWork("PIRRoadRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", startYear);
@@ -28,7 +29,7 @@ public class O_EditOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
         login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair");
+        choiseProgramWork("PIRRoadRepair");
         openEditObject(nameObject);
         editTopFormOPRPIR("Устройство поверхностной обработки", "12", "32", "43", "45", "26", startYear);
         addAndFillCorrection("Перераспределение средств с", "09.02.2022", "1321");
@@ -43,7 +44,7 @@ public class O_EditOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
         login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair");
+        choiseProgramWork("PIRRoadRepair");
 
         findNameObject(nameObject);
         checkStatusObject(nameObject, "Не рассмотрен");

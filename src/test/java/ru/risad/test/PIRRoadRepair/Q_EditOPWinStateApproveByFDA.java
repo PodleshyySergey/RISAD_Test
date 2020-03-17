@@ -1,18 +1,19 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class K_EditOPWinPIRRoadFullRepairStateInFormFDA extends TestBase {
+public class Q_EditOPWinStateApproveByFDA extends TestBase {
 
     @Test
-    public void testEditOPWinPIRRoadFullRepairStateInFormFKU() {
+    public void testEditOPWinStateApproveByFDA() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
-        login("fda", "vashkulat");
+        login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        choiseProgramWork("PIRRoadRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", startYear);
@@ -24,10 +25,11 @@ public class K_EditOPWinPIRRoadFullRepairStateInFormFDA extends TestBase {
         findNameObject(nameObject);
         logout();
 
+        //Редактирование ОПР
         login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair");
+        choiseProgramWork("PIRRoadRepair");
         openEditObject(nameObject);
         editTopFormOPRPIR("Устройство поверхностной обработки", "12", "32", "43", "45", "26", startYear);
         addAndFillCorrection("Перераспределение средств с", "09.02.2022", "1321");
@@ -36,6 +38,34 @@ public class K_EditOPWinPIRRoadFullRepairStateInFormFDA extends TestBase {
         saveEditOPRandCloseWindow();
         refreshCurrentWindow();
         logout();
+
+
+        //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
+        login("fda", "vashkulat");
+        choiceSection("Планирование");
+        choiceYear(startYear);
+        choiseProgramWork("PIRRoadRepair");
+
+        findNameObject(nameObject);
+        checkStatusObject(nameObject, "Не рассмотрен");
+
+        pushApprovalPWbyFDA();
+
+        refreshCurrentWindow();
+        checkStatusObject(nameObject, "Не рассмотрен");
+
+//        //Перевод ОПР из статуса "Не рассмотрено" в статус "Принято к утверждению"
+//        rightClick(nameObject);
+//        selectContextItem("Изменить статус объекта", "Принято к утверждению");
+//        refreshCurrentWindow();
+//        checkStatusObject(nameObject, "Принят");
+//
+//        pushApprovalPWbyFDA();
+//
+//        refreshCurrentWindow();
+
+        logout();
+
 
     }
 

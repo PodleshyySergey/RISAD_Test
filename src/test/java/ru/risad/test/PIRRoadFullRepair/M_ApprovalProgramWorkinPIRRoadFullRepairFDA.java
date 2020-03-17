@@ -1,6 +1,7 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadFullRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
 public class M_ApprovalProgramWorkinPIRRoadFullRepairFDA extends TestBase {
 

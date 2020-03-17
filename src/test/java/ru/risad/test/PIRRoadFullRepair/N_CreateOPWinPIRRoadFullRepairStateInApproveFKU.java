@@ -1,14 +1,16 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadFullRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class P_CreateOPWinPIRRoadFullRepairStateInApproveFDA extends TestBase {
+public class N_CreateOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
 
     @Test
-    public void testCreateOPWinPIRRoadFullRepairStateInApproveFDA() {
+    public void testCreateOPWinPIRRoadFullRepairStateInApproveFKU() {
+
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
-        login("fda", "vashkulat"); //baykal01/Orator16
+        login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
         choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
@@ -51,6 +53,7 @@ public class P_CreateOPWinPIRRoadFullRepairStateInApproveFDA extends TestBase {
 //        refreshCurrentWindow();
 
         logout();
+
     }
 
 }

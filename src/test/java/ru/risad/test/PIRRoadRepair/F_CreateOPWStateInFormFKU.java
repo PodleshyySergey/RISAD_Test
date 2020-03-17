@@ -1,18 +1,19 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class F_CreateOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
+public class F_CreateOPWStateInFormFKU extends TestBase {
 
     @Test
-    public void testCreateOPWinPIRRoadFullRepairStateInFormFKU() {
+    public void testCreateOPWStateInFormFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
         login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        choiseProgramWork("PIRRoadRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
         //Создание объекта программы работ
         pushCreateOPRandSaveWindow();
@@ -31,7 +32,7 @@ public class F_CreateOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
         login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair");
+        choiseProgramWork("PIRRoadRepair");
         findNameObject(nameObject);
 
     }

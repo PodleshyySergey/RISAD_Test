@@ -1,15 +1,16 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadFullRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class G_EditOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
+public class K_EditOPWinPIRRoadFullRepairStateInFormFDA extends TestBase {
 
     @Test
     public void testEditOPWinPIRRoadFullRepairStateInFormFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
-        login("baykal01", "Orator16");
+        login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear(startYear);
         choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
@@ -24,7 +25,7 @@ public class G_EditOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
         findNameObject(nameObject);
         logout();
 
-        login("baykal01", "Orator16");
+        login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear(startYear);
         choiseProgramWork("PIRRoadFullRepair");

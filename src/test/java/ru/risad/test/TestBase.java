@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class TestBase {
     public WebDriver driver;
     JavascriptExecutor js;
-    String baseURL = "https://172.16.10.57:7443/";
-    String nameObject = "";                         //переменная для сохранения имени ОПР, по которому потом будет поиск ОПР в гриде программы работ
-    String startYear = "2035";
+    public String baseURL = "https://172.16.10.57:7443/";
+    public String nameObject = "";                         //переменная для сохранения имени ОПР, по которому потом будет поиск ОПР в гриде программы работ
+    public String startYear = "2040";
     private Map<String, Object> vars;
 
     @BeforeMethod
@@ -48,11 +48,11 @@ public class TestBase {
     }
 
     //Нужно изменить, чтобы действительно в качестве параметра передавалось название программы работ, а не id
-    protected void choiseProgramWork(String idProgramWork) {
+    public void choiseProgramWork(String idProgramWork) {
         driver.findElement(By.id(idProgramWork)).click();
     }
 
-    protected void createObjectProgramWork() {
+    public void createObjectProgramWork() {
 
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", "2020");
@@ -63,7 +63,7 @@ public class TestBase {
 
     }
 
-    protected void saveOPRandCloseWindow() {
+    public void saveOPRandCloseWindow() {
         driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Создать')]")).click();															        //Обращение к кнопке создания объекта программы работ.
 //        driver.close();
         driver.switchTo().window(vars.get("root").toString());
@@ -73,12 +73,12 @@ public class TestBase {
         driver.navigate().refresh();
     }
 
-    protected void saveEditOPRandCloseWindow() {
+    public void saveEditOPRandCloseWindow() {
         driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Обновить')]")).click();															        //Обращение к кнопке создания объекта программы работ.
         driver.switchTo().window(vars.get("root").toString());
     }
 
-    protected void createObjectWork(final String discoveryFKU, final String discoveryRegion, final String selectRoadSection, String startRoadSectionKM, String startRoadSectionM, String endRoadSectionKM, String endRoadSectionM, String typeAndDateRepairRoad, String valueRoadTraffic, String categoryRoad) {
+    public void createObjectWork(final String discoveryFKU, final String discoveryRegion, final String selectRoadSection, String startRoadSectionKM, String startRoadSectionM, String endRoadSectionKM, String endRoadSectionM, String typeAndDateRepairRoad, String valueRoadTraffic, String categoryRoad) {
         //Создание объекта работ
         driver.findElement(By.xpath("//span[contains(.,'Объекты работы')]")).click();																               //Переход на вкладку "Объекты работ"
         driver.findElement(By.id("btn-create-newobj")).click();																							           //Обращение к кнопке создания объекта работ
@@ -103,7 +103,7 @@ public class TestBase {
         driver.findElement(By.xpath("//button[contains(.,'Да')]")).click();																				        //Обращение к кнопке сохранения объекта работ.
     }
 
-    protected void editObjectWork(final String discoveryFKU, final String discoveryRegion, final String selectRoadSection, String startRoadSectionKM, String startRoadSectionM, String endRoadSectionKM, String endRoadSectionM, String typeAndDateRepairRoad, String valueRoadTraffic, String categoryRoad) {
+    public void editObjectWork(final String discoveryFKU, final String discoveryRegion, final String selectRoadSection, String startRoadSectionKM, String startRoadSectionM, String endRoadSectionKM, String endRoadSectionM, String typeAndDateRepairRoad, String valueRoadTraffic, String categoryRoad) {
         //Создание объекта работ
         driver.findElement(By.xpath("//span[contains(.,'Объекты работы')]")).click();																               //Переход на вкладку "Объекты работ"
         driver.findElement(By.xpath("//a[@class='k-button k-button-icontext k-grid-edit']")).click();																							           //Обращение к кнопке редактирования объекта работ
@@ -136,7 +136,7 @@ public class TestBase {
     }
 
     //функция для добавления подстатьи без обращения к кнопке добавления (т.е. первая подстатья, грид которой сразу отображается на форме создания объекта программы работ)
-    protected void fillSubArticleFirst(final String numberArticle, final String selectTypeWork, String costArticle) {
+    public void fillSubArticleFirst(final String numberArticle, final String selectTypeWork, String costArticle) {
         //ДОБАВЛЕНИЕ ПОДСТАТЕЙ В ОБЪЕКТ ПРОГРАММЫ РАБОТ
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']/span")).click(); 			//Разворачивание списка подстатей
         driver.findElement(By.xpath("//li[contains(.,'" + numberArticle + "')]")).click();																						//Выбор подстатьи
@@ -161,7 +161,7 @@ public class TestBase {
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='textBoxValueYear k-input']")).sendKeys(costArticle);																									//Ввод значения в поле
     }
 
-    protected void addAndFillCorrection(final String nameCorrection, String dateCorrection, String numberCorrection) {
+    public void addAndFillCorrection(final String nameCorrection, String dateCorrection, String numberCorrection) {
         //ВНЕСЕНИЕ ОПИСАНИЯ КОРРЕКТИРОВКИ
 
         driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();								//Обращение к кнопке добавления описания корректировки
@@ -238,7 +238,7 @@ public class TestBase {
         driver.findElement(By.id("tb-endYear")).sendKeys(endYearWorks);             																			//Ввод значения в поле "Год окончания работ"
     }
 
-    protected void pushCreateOPRandSaveWindow() {
+    public void pushCreateOPRandSaveWindow() {
         vars.put("window_handles", driver.getWindowHandles());
         driver.findElement(By.xpath("//div[@id='btns-edits']/button/span")).click(); 													//обращение к кнопке создания ОПР
         vars.put("win4227", waitForWindow(2000));
@@ -246,7 +246,7 @@ public class TestBase {
         driver.switchTo().window(vars.get("win4227").toString());
     }
 
-    protected void choiceYear(String year) {
+    public void choiceYear(String year) {
         driver.findElement(By.xpath("//input[@id='program_year']")).click();
         driver.findElement(By.xpath("//input[@id='program_year']")).clear();
         driver.findElement(By.xpath("//input[@id='program_year']")).click();
@@ -254,16 +254,16 @@ public class TestBase {
         driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(year);
     }
 
-    protected void choiceSection(String section) {
+    public void choiceSection(String section) {
         driver.findElement(By.xpath("//span[contains(text(), '"+ section + "')]")).click();
     }
 
-    protected void gotoResourse(String url) {
+    public void gotoResourse(String url) {
         driver.get(url);
         driver.manage().window().maximize();
     }
 
-    protected void login(String userName, String userPassword) {
+    public void login(String userName, String userPassword) {
         //Закрытие сообщения "Подключение не защищено".
         if (isElementPresent(By.xpath("//button[@id='details-button']"))) {
             driver.findElement(By.xpath("//button[@id='details-button']")).click();
@@ -276,14 +276,14 @@ public class TestBase {
         driver.findElement(By.name("button")).click();
     }
 
-    protected void createProgramWorkIfNotCreatedLater() {
+    public void createProgramWorkIfNotCreatedLater() {
         if (isElementPresent(By.xpath("//div[@id='dialog']/p[1]"))) {
             driver.findElement(By.xpath("//button[contains(.,'Ok')]")).click();
         }
 
     }
 
-    protected void createProgramWork() {
+    public void createProgramWork() {
         driver.findElement(By.xpath("//button[contains(.,'Ok')]")).click();
     }
 
@@ -318,11 +318,11 @@ public class TestBase {
         driver.findElement(By.xpath("//a[@class='PostLogoutRedirectUri']")).click();
     }
 
-    protected void pushFomationPW() {
+    public void pushFomationPW() {
         driver.findElement(By.xpath("//button[@title='Сформировать']")).click();
     }
 
-    protected void fillDeleteCorrection() {
+    public void fillDeleteCorrection() {
         driver.findElement(By.id("correction-description-dialog-date")).click();										//Позиционирование на датапикере в описании корректировки
         driver.findElement(By.id("correction-description-dialog-date")).clear();										//Очиска поля датапикера в описании корректировки
         driver.findElement(By.id("correction-description-dialog-date")).sendKeys("12.03.2020");			//Ввод даты с клавиатуры в датапикер.
@@ -331,7 +331,7 @@ public class TestBase {
         driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
     }
 
-    protected void clickDeleteOPW(String nameObjectTemp) {
+    public void clickDeleteOPW(String nameObjectTemp) {
         driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]")).click();             //фокусировка на ОПР
         driver.findElement(By.xpath("//button[@ix='4']/span")).click();                             //обращение к кнопке редактирования ОПР
     }
@@ -352,7 +352,7 @@ public class TestBase {
                 action.build().perform();
     }
 
-    protected void pushApprovalPWbyFDA() {
+    public void pushApprovalPWbyFDA() {
         driver.findElement(By.xpath("//button[@title='Утвердить']/span")).click();
     }
 }

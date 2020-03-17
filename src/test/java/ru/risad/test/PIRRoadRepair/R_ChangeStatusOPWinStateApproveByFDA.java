@@ -1,18 +1,19 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class R_ChangeStatusOPWbyFDAinPIRRoadFullRepairStateApprove extends TestBase {
+public class R_ChangeStatusOPWinStateApproveByFDA extends TestBase {
 
     @Test
-    public void testChangeStatusOPWbyFDAinPIRRoadFullRepairStateApprove() {
+    public void testChangeStatusOPWinStateApproveByFDA() {
 
         //Предварительное создание объекта программы работ под учеткой ФКУ (чтобы ОПР был со статусом "Не рассмотрен")
         gotoResourse(baseURL);
         login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        choiseProgramWork("PIRRoadRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", startYear);
@@ -29,7 +30,7 @@ public class R_ChangeStatusOPWbyFDAinPIRRoadFullRepairStateApprove extends TestB
         login("fda", "vashkulat");
         choiceSection("Планирование");
         choiceYear(startYear);
-        choiseProgramWork("PIRRoadFullRepair");
+        choiseProgramWork("PIRRoadRepair");
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Принято к утверждению"
         rightClick(nameObject);

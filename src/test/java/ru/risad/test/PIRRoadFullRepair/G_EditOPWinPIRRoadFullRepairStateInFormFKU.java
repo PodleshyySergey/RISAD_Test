@@ -1,11 +1,12 @@
-package ru.risad.test;
+package ru.risad.test.PIRRoadFullRepair;
 
 import org.testng.annotations.Test;
+import ru.risad.test.TestBase;
 
-public class N_CreateOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
+public class G_EditOPWinPIRRoadFullRepairStateInFormFKU extends TestBase {
 
     @Test
-    public void testCreateOPWinPIRRoadFullRepairStateInApproveFKU() {
+    public void testEditOPWinPIRRoadFullRepairStateInFormFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
         gotoResourse(baseURL);
@@ -13,8 +14,7 @@ public class N_CreateOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
         choiceSection("Планирование");
         choiceYear(startYear);
         choiseProgramWork("PIRRoadFullRepair"); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
-
-        //Создание объекта программы работ
+//      Создание объекта программы работ
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", startYear);
         addAndFillCorrection("На вновь начинаемый объект", "09.02.2020", "123");
@@ -23,34 +23,19 @@ public class N_CreateOPWinPIRRoadFullRepairStateInApproveFKU extends TestBase {
         saveOPRandCloseWindow();
         refreshCurrentWindow();
         findNameObject(nameObject);
-
         logout();
 
-
-        //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login("fda", "vashkulat");
+        login("baykal01", "Orator16");
         choiceSection("Планирование");
         choiceYear(startYear);
         choiseProgramWork("PIRRoadFullRepair");
-
-        findNameObject(nameObject);
-        checkStatusObject(nameObject, "Не рассмотрен");
-
-        pushApprovalPWbyFDA();
-
+        openEditObject(nameObject);
+        editTopFormOPRPIR("Устройство поверхностной обработки", "12", "32", "43", "45", "26", startYear);
+        addAndFillCorrection("Перераспределение средств с", "09.02.2022", "1321");
+        editSubArticleFirst("226","Прочие затраты", "333");
+        editObjectWork("ФКУ Упрдор «Енисей»", "'Республика Тыва'", "\"Енисей\" Красноярск - Абакан - Кызыл - Чадан - Хандагайты - граница с Монголией'", "21", "222", "32", "333", "Ремонт 12.12.2014", "555", "0 категоря");
+        saveEditOPRandCloseWindow();
         refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
-
-//        //Перевод ОПР из статуса "Не рассмотрено" в статус "Принято к утверждению"
-//        rightClick(nameObject);
-//        selectContextItem("Изменить статус объекта", "Принято к утверждению");
-//        refreshCurrentWindow();
-//        checkStatusObject(nameObject, "Принят");
-//
-//        pushApprovalPWbyFDA();
-//
-//        refreshCurrentWindow();
-
         logout();
 
     }
