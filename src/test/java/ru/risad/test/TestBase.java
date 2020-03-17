@@ -17,7 +17,7 @@ public class TestBase {
     JavascriptExecutor js;
     String baseURL = "https://172.16.10.57:7443/";
     String nameObject = "";                         //переменная для сохранения имени ОПР, по которому потом будет поиск ОПР в гриде программы работ
-    String startYear = "2026";
+    String startYear = "2035";
     private Map<String, Object> vars;
 
     @BeforeMethod
@@ -28,7 +28,7 @@ public class TestBase {
         vars = new HashMap<String, Object>();
     }
 
-//    @AfterMethod
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
@@ -350,5 +350,9 @@ public class TestBase {
                 .moveToElement(driver.findElement(By.xpath("//li/span[contains(.,'" + submenuItem + "')]")))
                 .click();
                 action.build().perform();
+    }
+
+    protected void pushApprovalPWbyFDA() {
+        driver.findElement(By.xpath("//button[@title='Утвердить']/span")).click();
     }
 }
