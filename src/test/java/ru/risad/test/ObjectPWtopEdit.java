@@ -1,4 +1,4 @@
-package ru.risad.test.PIRRoadFullRepair;
+package ru.risad.test;
 
 public class ObjectPWtopEdit {
     private final String typeOfWork;

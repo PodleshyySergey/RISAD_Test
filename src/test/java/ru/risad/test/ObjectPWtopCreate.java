@@ -1,4 +1,4 @@
-package ru.risad.test.PIRRoadFullRepair;
+package ru.risad.test;
 
 public class ObjectPWtopCreate {
     private final String selectFKU;
