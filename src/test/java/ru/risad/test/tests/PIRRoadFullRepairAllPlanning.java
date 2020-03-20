@@ -1,17 +1,18 @@
-package ru.risad.test;
+package ru.risad.test.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import ru.risad.test.*;
 
-public class PIRRoadRepairAllPlanning extends TestBase {
+public class PIRRoadFullRepairAllPlanning extends TestBase {
 
 //    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //    ВНЕСЕНИЕ И РЕДАКТИРОВАНИЕ ТЕСТОВЫХ ДАННЫХ
 //    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //    выбор года программы работ (!!! для проходжения теста создания программы работ (testCreateProgramWorkFKU) необходимо указать год, в котором программа работ еще не создавалась)
-    public String YearProgramWork = "2035";
+    public String YearProgramWork = "2051";
 //     программа работ - Капремонт дорог ПИР
-    String idProgramWork = "PIRRoadRepair";
+    String idProgramWork = "PIRRoadFullRepair";
 //    Учетные записи пользователей для входа в систему
     User userFKU = new User("baykal01", "Orator16");
     User userFDA = new User("fda", "vashkulat");
