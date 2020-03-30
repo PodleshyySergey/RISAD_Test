@@ -246,11 +246,38 @@ public class TestBase {
     }
 
     public void choiceYear(String year) {
-        driver.findElement(By.xpath("//input[@id='program_year']")).click();
-        driver.findElement(By.xpath("//input[@id='program_year']")).clear();
-        driver.findElement(By.xpath("//input[@id='program_year']")).click();
-        driver.findElement(By.xpath("//input[@id='program_year']")).click();
-        driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(year);
+
+//        Попытка реализации через Actions (года, который есть в открыващемся датапикере, без перехода на другие года)
+//        Actions actions = new Actions(driver)
+//                .moveToElement(driver.findElement(By.xpath("//span[@aria-controls='program_year_dateview']")))
+//                .click()
+//                .moveToElement(driver.findElement(By.xpath("//div/table//td/a[contains(text(),'" + year + "')]")))
+//                .click();
+//        actions.build().perform();
+
+//      Попытка реализации выбора года путем открытия и кликами по кнопкам, но срабатывает первая строчка (не открывается датапикер)
+//        driver.findElement(By.xpath("//span[@aria-controls='program_year_dateview']")).click();
+//        int intYear = Integer.parseInt(year);
+//        int firstYear = Integer.parseInt(driver.findElement(By.xpath("//div/table//td/a[1]")).getText());
+//        int lastYear = Integer.parseInt(driver.findElement(By.xpath("//div/table//tr[3]/td[4]/a")).getText());
+//        while (intYear < firstYear) {
+//            driver.findElement(By.xpath("//div[@class='k-header']/a[@aria-label='Previous]")).click();
+//        }
+//        while (intYear > lastYear) {
+//            driver.findElement(By.xpath("//div[@class='k-header']/a[@aria-label='Next]")).click();
+//        }
+//        driver.findElement(By.xpath("//div/table//td/a[contais(text(),'" + year + "')]")).click();
+
+
+//      Реализация с очисткой поля и ввода года "с клавиатуры" (иногда дает сбои, почему-то вводятся не все цифры из числа года)
+//      После добавления цикла работает без сбоев
+        while (!driver.findElement(By.xpath("//input[@id='program_year']")).getAttribute("value").equals(year)) {
+            driver.findElement(By.xpath("//input[@id='program_year']")).click();
+            driver.findElement(By.xpath("//input[@id='program_year']")).clear();
+            driver.findElement(By.xpath("//input[@id='program_year']")).click();
+            driver.findElement(By.xpath("//input[@id='program_year']")).click();
+            driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(year);
+        }
     }
 
     public void choiceSection(String section) {
