@@ -23,20 +23,19 @@ public class ApplicationManager {
         driver.findElement(By.id(idProgramWork)).click();
     }
 
-    public void createObjectProgramWork() {
-
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(new ObjectPWfillTop("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", "2020"));
-        addAndFillCorrection(new Correction("На вновь начинаемый объект", "09.02.2020", "123"));
-        fillSubArticleFirst(new SubArticle("226", "Разработка проектной документации", "200"));
-        createObjectWork(new ObjectWork("ФКУ Упрдор «Енисей»", "'Республика Тыва'", "\"Енисей\" Красноярск - Абакан - Кызыл - Чадан - Хандагайты - граница с Монголией'", "12", "111", "21", "222", "Ремонт 12.12.2012", "444", "1 категоря"));
-        saveOPRandCloseWindow();
-
-    }
+//    public void createObjectProgramWork() {
+//
+//        pushCreateOPRandSaveWindow();
+//        fillTopFormOPRPIR(new ObjectPWfillTop("ФКУ Упрдор «Енисей»", "Республика Тыва", "Устройство защитных слоев", "11", "22", "33", "44", "24", "2020"));
+//        addAndFillCorrection(new Correction("На вновь начинаемый объект", "09.02.2020", "123"));
+//        fillSubArticleFirst(new SubArticle("226", "Разработка проектной документации", "200"));
+//        createObjectWork(new ObjectWork("ФКУ Упрдор «Енисей»", "'Республика Тыва'", "\"Енисей\" Красноярск - Абакан - Кызыл - Чадан - Хандагайты - граница с Монголией'", "12", "111", "21", "222", "Ремонт 12.12.2012", "444", "1 категоря"));
+//        saveOPRandCloseWindow();
+//
+//    }
 
     public void saveOPRandCloseWindow() {
-        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Создать')]")).click();															        //Обращение к кнопке создания объекта программы работ.
-//        driver.close();
+        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Создать')]")).click();	 //Обращение к кнопке создания объекта программы работ.
         driver.switchTo().window(vars.get("root").toString());
     }
 
@@ -45,7 +44,7 @@ public class ApplicationManager {
     }
 
     public void saveEditOPRandCloseWindow() {
-        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Обновить')]")).click();															        //Обращение к кнопке создания объекта программы работ.
+        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Обновить')]")).click();	//Обращение к кнопке создания объекта программы работ.
         driver.switchTo().window(vars.get("root").toString());
     }
 
@@ -57,21 +56,20 @@ public class ApplicationManager {
         driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']")).click();							           //Разворачивание списка ФКУ
         driver.findElement(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']")).click();							           //Выбор региона
         driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]")).click();																	           //Выбор участка дороги
-        driver.findElement(By.id("tb-start")).click();																									           //Позиционирование на поле ввода "Начало (км)"
-        driver.findElement(By.id("tb-start")).sendKeys(objectWork.getStartRoadSectionKM());																				       //Ввод значения в поле "Начало (км)"
-        driver.findElement(By.id("tb-startAdd")).click();																								        //Позиционирование на поле ввода "Начало (м)"
-        driver.findElement(By.id("tb-startAdd")).sendKeys(objectWork.getStartRoadSectionM());																				//Ввод значения в поле "Начало (м)"
-        driver.findElement(By.id("tb-finish")).click();																									        //Позиционирование на поле ввода "Конец (км)"
-        driver.findElement(By.id("tb-finish")).sendKeys(objectWork.getEndRoadSectionKM());																					//Ввод значения в поле "Конец (км)"
-        driver.findElement(By.id("tb-finishAdd")).click();																								        //Позиционирование на поле ввода "Конец (м)"
-        driver.findElement(By.id("tb-finishAdd")).sendKeys(objectWork.getEndRoadSectionM());																				//Ввод значения в поле "Конец (м)"
-        driver.findElement(By.id("tb-fullRepairDateStr")).click();																						        //Позиционирование на поле "Последний год ремонта..."
-        driver.findElement(By.id("tb-fullRepairDateStr")).sendKeys(objectWork.getTypeAndDateRepairRoad());															//Ввод значения в поле "Последний год ремонта..."
-        driver.findElement(By.id("tb-traffic")).clear();																								        //Очиска поля "Интенсивность движения"
-        driver.findElement(By.id("tb-traffic")).sendKeys(objectWork.getValueRoadTraffic());																					//Ввод значения в поле "Интенсивность движения"
-        driver.findElement(By.id("tb-categories")).click();																								        //Позиционирование на поле "Техническая категория"
-        driver.findElement(By.id("tb-categories")).sendKeys(objectWork.getCategoryRoad());																		//Ввод значения в поле "Техническая категория"
+        type(By.id("tb-start"),objectWork.getStartRoadSectionKM());
+        type(By.id("tb-startAdd"),objectWork.getStartRoadSectionM());
+        type(By.id("tb-finish"),objectWork.getEndRoadSectionKM());
+        type(By.id("tb-finishAdd"),objectWork.getEndRoadSectionM());
+        type(By.id("tb-fullRepairDateStr"),objectWork.getTypeAndDateRepairRoad());
+        type(By.id("tb-traffic"),objectWork.getValueRoadTraffic());
+        type(By.id("tb-categories"),objectWork.getCategoryRoad());
         driver.findElement(By.xpath("//button[contains(.,'Да')]")).click();																				        //Обращение к кнопке сохранения объекта работ.
+    }
+
+    private void type(By locator,String text) {
+        driver.findElement(locator).clear();
+        driver.findElement(locator).click();																									           //Позиционирование на поле ввода "Начало (км)"
+        driver.findElement(locator).sendKeys(text);																				       //Ввод значения в поле "Начало (км)"
     }
 
     public void editObjectWork(ObjectWork objectWork) {
@@ -82,27 +80,13 @@ public class ApplicationManager {
         driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']")).click();							           //Разворачивание списка ФКУ
         driver.findElement(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']")).click();							           //Выбор региона
         driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]")).click();																	           //Выбор участка дороги
-        driver.findElement(By.id("tb-start")).clear();
-        driver.findElement(By.id("tb-start")).click();																									           //Позиционирование на поле ввода "Начало (км)"
-        driver.findElement(By.id("tb-start")).sendKeys(objectWork.getStartRoadSectionKM());																				       //Ввод значения в поле "Начало (км)"
-        driver.findElement(By.id("tb-startAdd")).clear();
-        driver.findElement(By.id("tb-startAdd")).click();																								        //Позиционирование на поле ввода "Начало (м)"
-        driver.findElement(By.id("tb-startAdd")).sendKeys(objectWork.getStartRoadSectionM());																				//Ввод значения в поле "Начало (м)"
-        driver.findElement(By.id("tb-finish")).clear();
-        driver.findElement(By.id("tb-finish")).click();																									        //Позиционирование на поле ввода "Конец (км)"
-        driver.findElement(By.id("tb-finish")).sendKeys(objectWork.getEndRoadSectionKM());																					//Ввод значения в поле "Конец (км)"
-        driver.findElement(By.id("tb-finishAdd")).clear();
-        driver.findElement(By.id("tb-finishAdd")).click();																								        //Позиционирование на поле ввода "Конец (м)"
-        driver.findElement(By.id("tb-finishAdd")).sendKeys(objectWork.getEndRoadSectionM());																				//Ввод значения в поле "Конец (м)"
-        driver.findElement(By.id("tb-fullRepairDateStr")).clear();
-        driver.findElement(By.id("tb-fullRepairDateStr")).click();																						        //Позиционирование на поле "Последний год ремонта..."
-        driver.findElement(By.id("tb-fullRepairDateStr")).sendKeys(objectWork.getTypeAndDateRepairRoad());															//Ввод значения в поле "Последний год ремонта..."
-        driver.findElement(By.id("tb-traffic")).clear();
-        driver.findElement(By.id("tb-traffic")).clear();																								        //Очиска поля "Интенсивность движения"
-        driver.findElement(By.id("tb-traffic")).sendKeys(objectWork.getValueRoadTraffic());																					//Ввод значения в поле "Интенсивность движения"
-        driver.findElement(By.id("tb-categories")).clear();
-        driver.findElement(By.id("tb-categories")).click();																								        //Позиционирование на поле "Техническая категория"
-        driver.findElement(By.id("tb-categories")).sendKeys(objectWork.getCategoryRoad());																		//Ввод значения в поле "Техническая категория"
+        type(By.id("tb-start"),objectWork.getStartRoadSectionKM());
+        type(By.id("tb-startAdd"),objectWork.getStartRoadSectionM());
+        type(By.id("tb-finish"),objectWork.getEndRoadSectionKM());
+        type(By.id("tb-finishAdd"),objectWork.getEndRoadSectionM());
+        type(By.id("tb-fullRepairDateStr"),objectWork.getTypeAndDateRepairRoad());
+        type(By.id("tb-traffic"),objectWork.getValueRoadTraffic());
+        type(By.id("tb-categories"),objectWork.getCategoryRoad());
         driver.findElement(By.xpath("//button[contains(.,'Да')]")).click();																				        //Обращение к кнопке сохранения объекта работ.
     }
 
@@ -134,17 +118,11 @@ public class ApplicationManager {
 
     public void addAndFillCorrection(Correction correction) {
         //ВНЕСЕНИЕ ОПИСАНИЯ КОРРЕКТИРОВКИ
-
         driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();								//Обращение к кнопке добавления описания корректировки
-
         driver.findElement(By.xpath("//div[contains(text(),'Формулировка')]/..//span[@class='k-input']")).click();
         driver.findElement(By.xpath("//div[@id='correction-description-dialog-template-list']//li[contains(.,'" + correction.getNameCorrection() + "')]")).click();
-
-        driver.findElement(By.id("correction-description-dialog-date")).click();															//Позиционирование на датапикере в описании корректировки
-        driver.findElement(By.id("correction-description-dialog-date")).clear();															//Очиска поля датапикера в описании корректировки
-        driver.findElement(By.id("correction-description-dialog-date")).sendKeys(correction.getDateCorrection());								//Ввод даты с клавиатуры в датапикер. !!!нужно предварительно очистить поле ввода датапикера!!!
-        driver.findElement(By.id("correction-description-dialog-name")).click();															//Позиционирование на поле ввода "Номер документа".
-        driver.findElement(By.id("correction-description-dialog-name")).sendKeys(correction.getNumberCorrection());										//Ввод значения в поле "Номер документа"
+        type(By.id("correction-description-dialog-date"),correction.getDateCorrection());
+        type(By.id("correction-description-dialog-name"),correction.getNumberCorrection());
         driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();																			//Обращение к кнопке "Ок" на форме добавления описания корректировки.
     }
 
@@ -154,10 +132,9 @@ public class ApplicationManager {
             driver.findElement(By.xpath("//span[contains(text(),'" + objectPWfillTop.getSelectFKU() + "')]/../span[@class='k-icon k-i-expand']")).click();     //Разворачивание ФКУ
             driver.findElement(By.xpath("//span[contains(.,'" + objectPWfillTop.getSelectRegion() + "')]")).click();                                                    //Выбор региона
         }
-        driver.findElement(By.xpath("//div[contains(text(),'Регион')]")).click();														//Доп.клик для скрытия выпадающего списка "Регион"
-        nameObject = "Test_" + System.currentTimeMillis();                                                                              //Сохранение названия объекта в переменную для последующего проверки отображения в гриде программы работ
-        driver.findElement(By.id("ta-name")).click();																					//Позиционирование на поле для ввода Наименования объекта
-        driver.findElement(By.id("ta-name")).sendKeys(nameObject);							                            //Ввод наименования объекта
+        driver.findElement(By.xpath("//div[contains(text(),'Регион')]")).click();	//Доп.клик для скрытия выпадающего списка "Регион"
+        nameObject = "Test_" + System.currentTimeMillis();                          //Сохранение названия объекта в переменную для последующего проверки отображения в гриде программы работ
+        type(By.id("ta-name"),nameObject);
         driver.findElement(By.xpath("//div[contains(text(),'Вид работ')]/..//span[@class='k-widget k-dropdown']")).click();				//Разворачивание списка "Вид работ"
         driver.findElement(By.xpath("//li[contains(.,'" + objectPWfillTop.getTypeOfWork() + "')]")).click();											//Выбор значения из списка "Устройство защитных слоев"
         driver.findElement(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Протяженность ремонтируемого покрытия (км)"
@@ -201,9 +178,7 @@ public class ApplicationManager {
         driver.findElement(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']")).click();			                //Позиционирование на поле ввода "Объем работ (км)"
         driver.findElement(By.id("tb-jobAmount")).sendKeys(objectPWfillTop.getScopeWork());																				//Ввод значения в поле "Объем работ (км)"
 
-        driver.findElement(By.id("tb-cmrDates")).clear();
-        driver.findElement(By.id("tb-cmrDates")).click();               	                                                                                    //Позиционирование на поле "Сроки проведения СМР"
-        driver.findElement(By.id("tb-cmrDates")).sendKeys(objectPWfillTop.getDatesCMR());																		    		//Ввод значения в поле "Сроки проведения СМР"
+        type(By.id("tb-cmrDates"),objectPWfillTop.getDatesCMR());
 
         driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
         driver.findElement(By.id("tb-endYear")).clear(); 	                                                                                                     //Очистка поля "Год окончания работ"
@@ -269,10 +244,8 @@ public class ApplicationManager {
             driver.findElement(By.xpath("//button[@id='details-button']")).click();
             driver.findElement(By.xpath("//a[@id='proceed-link']")).click();
         }
-        driver.findElement(By.id("Username")).click();
-        driver.findElement(By.id("Username")).sendKeys(user.getLogin());
-        driver.findElement(By.id("Password")).click();
-        driver.findElement(By.id("Password")).sendKeys(user.getPassword());
+        type(By.id("Username"),user.getLogin());
+        type(By.id("Password"),user.getPassword());
         driver.findElement(By.name("button")).click();
     }
 
@@ -317,12 +290,9 @@ public class ApplicationManager {
         driver.findElement(By.xpath("//button[@title='Сформировать']")).click();
     }
 
-    public void fillDeleteCorrection() {
-        driver.findElement(By.id("correction-description-dialog-date")).click();										//Позиционирование на датапикере в описании корректировки
-        driver.findElement(By.id("correction-description-dialog-date")).clear();										//Очиска поля датапикера в описании корректировки
-        driver.findElement(By.id("correction-description-dialog-date")).sendKeys("12.03.2020");			//Ввод даты с клавиатуры в датапикер.
-        driver.findElement(By.id("correction-description-dialog-doc")).click();											//Позиционирование на поле ввода "Номер документа".
-        driver.findElement(By.id("correction-description-dialog-doc")).sendKeys("123");					//Ввод значения в поле "Номер документа"
+    public void fillDeleteCorrection(Correction deleteCorr) {
+        type(By.id("correction-description-dialog-date"),deleteCorr.getDateCorrection());
+        type(By.id("correction-description-dialog-doc"),deleteCorr.getNumberCorrection());
         driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
     }
 

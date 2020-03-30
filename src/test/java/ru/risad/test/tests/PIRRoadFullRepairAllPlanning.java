@@ -51,6 +51,10 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
             "Перераспределение средств с",
             "19.03.2022",
             "1321");
+    Correction deleteCorr = new Correction(
+            "",
+            "28.03.2020",
+            "333");
     //    Тестовые данные для постатей
     SubArticle article226RPD = new SubArticle(
             "226",
@@ -274,7 +278,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         app.choiceYear(YearProgramWork);
         app.selectProgramWork(idProgramWork);
         app.clickDeleteOPW(app.nameObject);
-        app.fillDeleteCorrection();
+        app.fillDeleteCorrection(deleteCorr);
         app.refreshCurrentWindow();
 //        Тут еще надо добавить проверку на отсутствие ОПр в гриде программы работ
         app.logout();
