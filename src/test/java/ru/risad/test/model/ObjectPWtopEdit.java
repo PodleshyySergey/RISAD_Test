@@ -1,4 +1,4 @@
-package ru.risad.test;
+package ru.risad.test.model;
 
 public class ObjectPWtopEdit {
     private final String typeOfWork;

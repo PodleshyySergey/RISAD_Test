@@ -2,7 +2,7 @@ package ru.risad.test.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import ru.risad.test.*;
+import ru.risad.test.model.*;
 
 public class PIRRoadRepairAllPlanning extends TestBase {
 
