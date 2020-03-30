@@ -1,6 +1,6 @@
 package ru.risad.test.model;
 
-public class ObjectPWtopCreate {
+public class ObjectPWfillTop {
     private final String selectFKU;
     private final String selectRegion;
     private final String typeOfWork;
@@ -11,7 +11,7 @@ public class ObjectPWtopCreate {
     private final String datesCMR;
     private final String endYearWorks;
 
-    public ObjectPWtopCreate(String selectFKU, String selectRegion, String typeOfWork, String lengthRepairCovering, String areaRepairCovering, String coastPIR, String scopeWork, String datesCMR, String endYearWorks) {
+    public ObjectPWfillTop(String selectFKU, String selectRegion, String typeOfWork, String lengthRepairCovering, String areaRepairCovering, String coastPIR, String scopeWork, String datesCMR, String endYearWorks) {
         this.selectFKU = selectFKU;
         this.selectRegion = selectRegion;
         this.typeOfWork = typeOfWork;

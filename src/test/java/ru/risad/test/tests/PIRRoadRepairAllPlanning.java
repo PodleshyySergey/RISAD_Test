@@ -17,7 +17,7 @@ public class PIRRoadRepairAllPlanning extends TestBase {
     User userFKU = new User("baykal01", "Orator16");
     User userFDA = new User("fda", "vashkulat");
     //    Тестовые данные для создания и редактирования объекта программы работ
-    ObjectPWtopCreate objectPWCreate1 = new ObjectPWtopCreate(
+    ObjectPWfillTop objectPWCreate1 = new ObjectPWfillTop(
             "ФКУ Упрдор «Енисей»",
             "Республика Тыва",
             "Устройство защитных слоев",
@@ -27,7 +27,9 @@ public class PIRRoadRepairAllPlanning extends TestBase {
             "44",
             "24",
             YearProgramWork);
-    ObjectPWtopEdit objectPWEdit1 = new ObjectPWtopEdit(
+    ObjectPWfillTop objectPWEdit1 = new ObjectPWfillTop(
+            "",
+            "",
             "Устройство поверхностной обработки",
             "12",
             "32",
