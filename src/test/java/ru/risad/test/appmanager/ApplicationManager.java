@@ -20,7 +20,7 @@ public class ApplicationManager {
     JavascriptExecutor js;
 
     public void selectProgramWork(String idProgramWork) {
-        driver.findElement(By.id(idProgramWork)).click();
+        сlick(By.id(idProgramWork));
     }
 
 //    public void createObjectProgramWork() {
@@ -35,8 +35,12 @@ public class ApplicationManager {
 //    }
 
     public void saveOPRandCloseWindow() {
-        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Создать')]")).click();	 //Обращение к кнопке создания объекта программы работ.
+        сlick(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Создать')]"));	 //Обращение к кнопке создания объекта программы работ.
         driver.switchTo().window(vars.get("root").toString());
+    }
+
+    private void сlick(By locator) {
+        driver.findElement(locator).click();
     }
 
     public void refreshCurrentWindow() {
@@ -44,18 +48,18 @@ public class ApplicationManager {
     }
 
     public void saveEditOPRandCloseWindow() {
-        driver.findElement(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Обновить')]")).click();	//Обращение к кнопке создания объекта программы работ.
+        сlick(By.xpath("//div[@id='programobjectcontainer']/div/button[contains(.,'Обновить')]"));
         driver.switchTo().window(vars.get("root").toString());
     }
 
     public void createObjectWork(ObjectWork objectWork) {
         //Создание объекта работ
-        driver.findElement(By.xpath("//span[contains(.,'Объекты работы')]")).click();																               //Переход на вкладку "Объекты работ"
-        driver.findElement(By.id("btn-create-newobj")).click();																							           //Обращение к кнопке создания объекта работ
-        driver.findElement(By.xpath("//div[contains(text(),'Наименование дороги')]/..//span[@class='k-widget k-dropdowntree k-dropdowntree-clearable']")).click(); //Разворачивание списка для поля "Наименование дороги"
-        driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']")).click();							           //Разворачивание списка ФКУ
-        driver.findElement(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']")).click();							           //Выбор региона
-        driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]")).click();																	           //Выбор участка дороги
+        сlick(By.xpath("//span[contains(.,'Объекты работы')]"));
+        сlick(By.id("btn-create-newobj"));
+        сlick(By.xpath("//div[contains(text(),'Наименование дороги')]/..//span[@class='k-widget k-dropdowntree k-dropdowntree-clearable']"));
+        сlick(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']"));
+        сlick(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']"));
+        сlick(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]"));
         type(By.id("tb-start"),objectWork.getStartRoadSectionKM());
         type(By.id("tb-startAdd"),objectWork.getStartRoadSectionM());
         type(By.id("tb-finish"),objectWork.getEndRoadSectionKM());
@@ -63,23 +67,23 @@ public class ApplicationManager {
         type(By.id("tb-fullRepairDateStr"),objectWork.getTypeAndDateRepairRoad());
         type(By.id("tb-traffic"),objectWork.getValueRoadTraffic());
         type(By.id("tb-categories"),objectWork.getCategoryRoad());
-        driver.findElement(By.xpath("//button[contains(.,'Да')]")).click();																				        //Обращение к кнопке сохранения объекта работ.
+        сlick(By.xpath("//button[contains(.,'Да')]"));
     }
 
     private void type(By locator,String text) {
         driver.findElement(locator).clear();
-        driver.findElement(locator).click();																									           //Позиционирование на поле ввода "Начало (км)"
+        сlick(locator);
         driver.findElement(locator).sendKeys(text);																				       //Ввод значения в поле "Начало (км)"
     }
 
     public void editObjectWork(ObjectWork objectWork) {
         //Создание объекта работ
-        driver.findElement(By.xpath("//span[contains(.,'Объекты работы')]")).click();																               //Переход на вкладку "Объекты работ"
-        driver.findElement(By.xpath("//a[@class='k-button k-button-icontext k-grid-edit']")).click();																							           //Обращение к кнопке редактирования объекта работ
-        driver.findElement(By.xpath("//div[contains(text(),'Наименование дороги')]/..//span[@class='k-widget k-dropdowntree k-dropdowntree-clearable']")).click(); //Разворачивание списка для поля "Наименование дороги"
-        driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']")).click();							           //Разворачивание списка ФКУ
-        driver.findElement(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']")).click();							           //Выбор региона
-        driver.findElement(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]")).click();																	           //Выбор участка дороги
+        сlick(By.xpath("//span[contains(.,'Объекты работы')]"));
+        сlick(By.xpath("//a[@class='k-button k-button-icontext k-grid-edit']"));
+        сlick(By.xpath("//div[contains(text(),'Наименование дороги')]/..//span[@class='k-widget k-dropdowntree k-dropdowntree-clearable']"));
+        сlick(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']"));
+        сlick(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']"));
+        сlick(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]"));
         type(By.id("tb-start"),objectWork.getStartRoadSectionKM());
         type(By.id("tb-startAdd"),objectWork.getStartRoadSectionM());
         type(By.id("tb-finish"),objectWork.getEndRoadSectionKM());
@@ -87,108 +91,108 @@ public class ApplicationManager {
         type(By.id("tb-fullRepairDateStr"),objectWork.getTypeAndDateRepairRoad());
         type(By.id("tb-traffic"),objectWork.getValueRoadTraffic());
         type(By.id("tb-categories"),objectWork.getCategoryRoad());
-        driver.findElement(By.xpath("//button[contains(.,'Да')]")).click();																				        //Обращение к кнопке сохранения объекта работ.
+        сlick(By.xpath("//button[contains(.,'Да')]"));
     }
 
     //функция для добавления подстатьи без обращения к кнопке добавления (т.е. первая подстатья, грид которой сразу отображается на форме создания объекта программы работ)
     public void fillSubArticleFirst(SubArticle subArticle) {
         //ДОБАВЛЕНИЕ ПОДСТАТЕЙ В ОБЪЕКТ ПРОГРАММЫ РАБОТ
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']/span/span")).click(); 			//Разворачивание списка подстатей
-        driver.findElement(By.xpath("//li[contains(.,'" + subArticle.getNumberArticle() + "')]")).click();																						//Выбор подстатьи
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']/span/span"));
+        сlick(By.xpath("//li[contains(.,'" + subArticle.getNumberArticle() + "')]"));
 
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownJobType']")).click(); 			//Разворачивание списка в столбце "Вид работ"
-        driver.findElement(By.xpath("//div[@class='k-animation-container'][4]//li[contains(text(),'" + subArticle.getSelectTypeWork() + "')]")).click();				//Выбор значения из списка "Разработка проектной документации"
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='k-formatted-value textBoxValueYear k-input']")).click();	//Позиционирование на поле ввода в столбце с годом ПР
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownJobType']"));
+        сlick(By.xpath("//div[@class='k-animation-container'][4]//li[contains(text(),'" + subArticle.getSelectTypeWork() + "')]"));
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='k-formatted-value textBoxValueYear k-input']"));
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='textBoxValueYear k-input']")).sendKeys(subArticle.getCostArticle());																									//Ввод значения в поле
     }
 
     public void editSubArticleFirst(SubArticle subArticle) {
         //ДОБАВЛЕНИЕ ПОДСТАТЕЙ В ОБЪЕКТ ПРОГРАММЫ РАБОТ
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']/span")).click(); 			//Разворачивание списка подстатей
-        driver.findElement(By.xpath("//li[contains(.,'" + subArticle.getNumberArticle() + "')]")).click();																						//Выбор подстатьи
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownArticle']/span"));
+        сlick(By.xpath("//li[contains(.,'" + subArticle.getNumberArticle() + "')]"));
 
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownJobType']")).click(); 			//Разворачивание списка в столбце "Вид работ"
-        driver.findElement(By.xpath("//li[contains(.,'" + subArticle.getSelectTypeWork() + "')]")).click();				//Выбор значения из списка "Разработка проектной документации"
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']/span[@class='k-widget k-dropdown dropDownJobType']"));
+        сlick(By.xpath("//li[contains(.,'" + subArticle.getSelectTypeWork() + "')]"));
 
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='k-formatted-value textBoxValueYear k-input']")).click();
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='k-formatted-value textBoxValueYear k-input']"));
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='textBoxValueYear k-input']")).clear();
-        driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='k-formatted-value textBoxValueYear k-input']")).click();	//Позиционирование на поле ввода в столбце с годом ПР
+        сlick(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='k-formatted-value textBoxValueYear k-input']"));
         driver.findElement(By.xpath("//tbody[@role='rowgroup']//td[@role='gridcell']//input[@class='textBoxValueYear k-input']")).sendKeys(subArticle.getCostArticle());																									//Ввод значения в поле
     }
 
     public void addAndFillCorrection(Correction correction) {
         //ВНЕСЕНИЕ ОПИСАНИЯ КОРРЕКТИРОВКИ
-        driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();								//Обращение к кнопке добавления описания корректировки
-        driver.findElement(By.xpath("//div[contains(text(),'Формулировка')]/..//span[@class='k-input']")).click();
-        driver.findElement(By.xpath("//div[@id='correction-description-dialog-template-list']//li[contains(.,'" + correction.getNameCorrection() + "')]")).click();
+        сlick(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button"));
+        сlick(By.xpath("//div[contains(text(),'Формулировка')]/..//span[@class='k-input']"));
+        сlick(By.xpath("//div[@id='correction-description-dialog-template-list']//li[contains(.,'" + correction.getNameCorrection() + "')]"));
         type(By.id("correction-description-dialog-date"),correction.getDateCorrection());
         type(By.id("correction-description-dialog-name"),correction.getNumberCorrection());
-        driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();																			//Обращение к кнопке "Ок" на форме добавления описания корректировки.
+        сlick(By.xpath("//button[contains(text(),'Ok')]"));
     }
 
     public void fillTopFormOPRPIR(ObjectPWfillTop objectPWfillTop) {
         if (!objectPWfillTop.getSelectFKU().equals("")) {
-            driver.findElement(By.xpath("//div[contains(text(),'Регион')]/..//span[@class='k-dropdown-wrap k-state-default']")).click();    //Разворачивание списка "Регион"
-            driver.findElement(By.xpath("//span[contains(text(),'" + objectPWfillTop.getSelectFKU() + "')]/../span[@class='k-icon k-i-expand']")).click();     //Разворачивание ФКУ
-            driver.findElement(By.xpath("//span[contains(.,'" + objectPWfillTop.getSelectRegion() + "')]")).click();                                                    //Выбор региона
+            сlick(By.xpath("//div[contains(text(),'Регион')]/..//span[@class='k-dropdown-wrap k-state-default']"));
+            сlick(By.xpath("//span[contains(text(),'" + objectPWfillTop.getSelectFKU() + "')]/../span[@class='k-icon k-i-expand']"));
+            сlick(By.xpath("//span[contains(.,'" + objectPWfillTop.getSelectRegion() + "')]"));
         }
-        driver.findElement(By.xpath("//div[contains(text(),'Регион')]")).click();	//Доп.клик для скрытия выпадающего списка "Регион"
+        сlick(By.xpath("//div[contains(text(),'Регион')]"));
         nameObject = "Test_" + System.currentTimeMillis();                          //Сохранение названия объекта в переменную для последующего проверки отображения в гриде программы работ
         type(By.id("ta-name"),nameObject);
-        driver.findElement(By.xpath("//div[contains(text(),'Вид работ')]/..//span[@class='k-widget k-dropdown']")).click();				//Разворачивание списка "Вид работ"
-        driver.findElement(By.xpath("//li[contains(.,'" + objectPWfillTop.getTypeOfWork() + "')]")).click();											//Выбор значения из списка "Устройство защитных слоев"
-        driver.findElement(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Протяженность ремонтируемого покрытия (км)"
+        сlick(By.xpath("//div[contains(text(),'Вид работ')]/..//span[@class='k-widget k-dropdown']"));
+        сlick(By.xpath("//li[contains(.,'" + objectPWfillTop.getTypeOfWork() + "')]"));
+        сlick(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-roadLength")).sendKeys(objectPWfillTop.getLengthRepairCovering());																				//Ввод значения в поле "Протяженность ремонтируемого покрытия (км)"
-        driver.findElement(By.xpath("//div[contains(text(),'Площадь ремонтируемого покрытия (кв.м)')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Площадь ремонтируемого покрытия (кв.м.)"
+        сlick(By.xpath("//div[contains(text(),'Площадь ремонтируемого покрытия (кв.м)')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-coveringArea")).sendKeys(objectPWfillTop.getAreaRepairCovering());																			    //Ввод значения в поле "Площадь ремонтируемого покрытия (кв.м.)"
-        driver.findElement(By.xpath("//div[contains(text(),'Стоимость проектно-изыскательских работ')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Стоимость проектно-изыскательских работ в соответствии с расчетами (тыс. руб)"
+        сlick(By.xpath("//div[contains(text(),'Стоимость проектно-изыскательских работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-psdCost")).sendKeys(objectPWfillTop.getCoastPIR());																					//Ввод значения в поле "Стоимость проектно-изыскательских работ в соответствии с расчетами (тыс. руб)"
-        driver.findElement(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']")).click();			                //Позиционирование на поле ввода "Объем работ (км)"
+        сlick(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-jobAmount")).sendKeys(objectPWfillTop.getScopeWork());																				//Ввод значения в поле "Объем работ (км)"
-        driver.findElement(By.id("tb-cmrDates")).click();               	                                                                                    //Позиционирование на поле "Сроки проведения СМР"
+        сlick(By.id("tb-cmrDates"));
         driver.findElement(By.id("tb-cmrDates")).sendKeys(objectPWfillTop.getDatesCMR());																		    		//Ввод значения в поле "Сроки проведения СМР"
-        driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
+        сlick(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-endYear")).clear(); 	                                                                                                     //Очистка поля "Год окончания работ"
-        driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
+        сlick(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-endYear")).sendKeys(objectPWfillTop.getEndYearWorks());																				//Ввод значения в поле "Год окончания работ"
     }
 
     public void editTopFormOPRPIR(ObjectPWfillTop objectPWfillTop) {
 
-        driver.findElement(By.xpath("//div[contains(text(),'Вид работ')]/..//span[@class='k-widget k-dropdown']")).click();				//Разворачивание списка "Вид работ"
-        driver.findElement(By.xpath("//li[contains(.,'" + objectPWfillTop.getTypeOfWork() + "')]")).click();										        	//Выбор значения из списка "Устройство защитных слоев"
+        сlick(By.xpath("//div[contains(text(),'Вид работ')]/..//span[@class='k-widget k-dropdown']"));
+        сlick(By.xpath("//li[contains(.,'" + objectPWfillTop.getTypeOfWork() + "')]"));
 
-        driver.findElement(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']")).click();
+        сlick(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-roadLength")).clear();
-        driver.findElement(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Протяженность ремонтируемого покрытия (км)"
+        сlick(By.xpath("//div[contains(text(),'Протяженность ремонтируемого покрытия (км)')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-roadLength")).sendKeys(objectPWfillTop.getLengthRepairCovering());																				//Ввод значения в поле "Протяженность ремонтируемого покрытия (км)"
 
-        driver.findElement(By.xpath("//div[contains(text(),'Площадь ремонтируемого покрытия (кв.м)')]/..//input[@class='k-formatted-value k-input']")).click();
+        сlick(By.xpath("//div[contains(text(),'Площадь ремонтируемого покрытия (кв.м)')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-coveringArea")).clear();
-        driver.findElement(By.xpath("//div[contains(text(),'Площадь ремонтируемого покрытия (кв.м)')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Площадь ремонтируемого покрытия (кв.м.)"
+        сlick(By.xpath("//div[contains(text(),'Площадь ремонтируемого покрытия (кв.м)')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-coveringArea")).sendKeys(objectPWfillTop.getAreaRepairCovering());																			    //Ввод значения в поле "Площадь ремонтируемого покрытия (кв.м.)"
 
-        driver.findElement(By.xpath("//div[contains(text(),'Стоимость проектно-изыскательских работ')]/..//input[@class='k-formatted-value k-input']")).click();
+        сlick(By.xpath("//div[contains(text(),'Стоимость проектно-изыскательских работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-psdCost")).clear();
-        driver.findElement(By.xpath("//div[contains(text(),'Стоимость проектно-изыскательских работ')]/..//input[@class='k-formatted-value k-input']")).click(); //Позиционирование на поле ввода "Стоимость проектно-изыскательских работ в соответствии с расчетами (тыс. руб)"
+        сlick(By.xpath("//div[contains(text(),'Стоимость проектно-изыскательских работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-psdCost")).sendKeys(objectPWfillTop.getCoastPIR());																					//Ввод значения в поле "Стоимость проектно-изыскательских работ в соответствии с расчетами (тыс. руб)"
 
-        driver.findElement(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']")).click();
+        сlick(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-jobAmount")).clear();
-        driver.findElement(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']")).click();			                //Позиционирование на поле ввода "Объем работ (км)"
+        сlick(By.xpath("//div[contains(text(),'Объем работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-jobAmount")).sendKeys(objectPWfillTop.getScopeWork());																				//Ввод значения в поле "Объем работ (км)"
 
         type(By.id("tb-cmrDates"),objectPWfillTop.getDatesCMR());
 
-        driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
+        сlick(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-endYear")).clear(); 	                                                                                                     //Очистка поля "Год окончания работ"
-        driver.findElement(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']")).click(); 	                //Позиционирование на поле ввода "Год окончания работ"
+        сlick(By.xpath("//div[contains(text(),'Год окончания работ')]/..//input[@class='k-formatted-value k-input']"));
         driver.findElement(By.id("tb-endYear")).sendKeys(objectPWfillTop.getEndYearWorks());             																			//Ввод значения в поле "Год окончания работ"
     }
 
     public void pushCreateOPRandSaveWindow() {
         vars.put("window_handles", driver.getWindowHandles());
-        driver.findElement(By.xpath("//div[@id='btns-edits']/button/span")).click(); 													//обращение к кнопке создания ОПР
+        сlick(By.xpath("//div[@id='btns-edits']/button/span"));
         vars.put("win4227", waitForWindow(2000));
         vars.put("root", driver.getWindowHandle());
         driver.switchTo().window(vars.get("win4227").toString());
@@ -221,16 +225,12 @@ public class ApplicationManager {
 //      Реализация с очисткой поля и ввода года "с клавиатуры" (иногда дает сбои, почему-то вводятся не все цифры из числа года)
 //      После добавления цикла работает без сбоев
         while (!driver.findElement(By.xpath("//input[@id='program_year']")).getAttribute("value").equals(year)) {
-            driver.findElement(By.xpath("//input[@id='program_year']")).click();
-            driver.findElement(By.xpath("//input[@id='program_year']")).clear();
-            driver.findElement(By.xpath("//input[@id='program_year']")).click();
-            driver.findElement(By.xpath("//input[@id='program_year']")).click();
-            driver.findElement(By.xpath("//input[@id='program_year']")).sendKeys(year);
+            type(By.xpath("//input[@id='program_year']"),year);
         }
     }
 
     public void choiceSection(String section) {
-        driver.findElement(By.xpath("//span[contains(text(), '"+ section + "')]")).click();
+        сlick(By.xpath("//span[contains(text(), '"+ section + "')]"));
     }
 
     public void gotoResourse(String url) {
@@ -241,23 +241,23 @@ public class ApplicationManager {
     public void login(User user) {
         //Закрытие сообщения "Подключение не защищено".
         if (isElementPresent(By.xpath("//button[@id='details-button']"))) {
-            driver.findElement(By.xpath("//button[@id='details-button']")).click();
-            driver.findElement(By.xpath("//a[@id='proceed-link']")).click();
+            сlick(By.xpath("//button[@id='details-button']"));
+            сlick(By.xpath("//a[@id='proceed-link']"));
         }
         type(By.id("Username"),user.getLogin());
         type(By.id("Password"),user.getPassword());
-        driver.findElement(By.name("button")).click();
+        сlick(By.name("button"));
     }
 
     public void createProgramWorkIfNotCreatedLater() {
         if (isElementPresent(By.xpath("//div[@id='dialog']/p[1]"))) {
-            driver.findElement(By.xpath("//button[contains(.,'Ok')]")).click();
+            сlick(By.xpath("//button[contains(.,'Ok')]"));
         }
 
     }
 
     public void createProgramWork() {
-        driver.findElement(By.xpath("//button[contains(.,'Ok')]")).click();
+        сlick(By.xpath("//button[contains(.,'Ok')]"));
     }
 
     public boolean isElementPresent(By locator) {
@@ -274,31 +274,31 @@ public class ApplicationManager {
 
     public void openEditObject(String nameObjectTemp) {
         vars.put("window_handles", driver.getWindowHandles());
-        driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]")).click();     //фокусировка на ОПР
-        driver.findElement(By.xpath("//button[@ix='3']/span")).click();                              //обращение к кнопке редактирования ОПР
+        сlick(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]"));
+        сlick(By.xpath("//button[@ix='3']/span"));
         vars.put("win4228", waitForWindow(2000));
         vars.put("root", driver.getWindowHandle());
         driver.switchTo().window(vars.get("win4228").toString());
     }
 
     public void logout() {
-        driver.findElement(By.xpath("//div[@class='user-panel logout item']//input[@type='submit']")).click();
-        driver.findElement(By.xpath("//a[@class='PostLogoutRedirectUri']")).click();
+        сlick(By.xpath("//div[@class='user-panel logout item']//input[@type='submit']"));
+        сlick(By.xpath("//a[@class='PostLogoutRedirectUri']"));
     }
 
     public void pushFomationPW() {
-        driver.findElement(By.xpath("//button[@title='Сформировать']")).click();
+        сlick(By.xpath("//button[@title='Сформировать']"));
     }
 
     public void fillDeleteCorrection(Correction deleteCorr) {
         type(By.id("correction-description-dialog-date"),deleteCorr.getDateCorrection());
         type(By.id("correction-description-dialog-doc"),deleteCorr.getNumberCorrection());
-        driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+        сlick(By.xpath("//button[contains(text(),'Ok')]"));
     }
 
     public void clickDeleteOPW(String nameObjectTemp) {
-        driver.findElement(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]")).click();             //фокусировка на ОПР
-        driver.findElement(By.xpath("//button[@ix='4']/span")).click();                             //обращение к кнопке редактирования ОПР
+        сlick(By.xpath("//td[contains(.,'" + nameObjectTemp + "')]"));
+        сlick(By.xpath("//button[@ix='4']/span"));
     }
 
     public void rightClick(final String nameObiect) {
@@ -318,7 +318,7 @@ public class ApplicationManager {
     }
 
     public void pushApprovalPWbyFDA() {
-        driver.findElement(By.xpath("//button[@title='Утвердить']/span")).click();
+        сlick(By.xpath("//button[@title='Утвердить']/span"));
     }
 
     public String waitForWindow(int timeout) {
