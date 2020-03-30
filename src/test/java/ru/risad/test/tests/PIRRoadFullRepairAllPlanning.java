@@ -89,99 +89,99 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
 
     @Test
     public void testCreateProgramWorkFKU() {
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);      //Нужно указывать год, в котором программа работ еще не была создана
-        selectProgramWork(idProgramWork);
-        createProgramWork();
-        logout();
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);      //Нужно указывать год, в котором программа работ еще не была создана
+        app.selectProgramWork(idProgramWork);
+        app.createProgramWork();
+        app.logout();
     }
 
     @Test(priority = 1)
     public void testCreateOPWinStateDevelopByFKU() {
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
 
 //        Костыль для того, чтобы срабатывала функция fillSubArticleFirst.
 //        Почему-то нужно открыть и закрыть окно добавления корректировки,
 //        и тогда выпадающиий список с номерами подстатей будет открываться
-        driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
-        driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
+        app.driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
+        app.driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
 
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
 
-        logout();
+        app.logout();
 
     }
 
     @Test(priority = 2)
     public void testEditOPWinStateDevelopByFKU() {
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
 //        addAndFillCorrection(correctionCreate);
 
 //        Костыль для того, чтобы срабатывала функция fillSubArticleFirst.
 //        Почему-то нужно открыть и закрыть окно добавления корректировки,
 //        и тогда выпадающиий список с номерами подстатей будет открываться
-        driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
-        driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
+        app.driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
+        app.driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
 
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        openEditObject(nameObject);
-        editTopFormOPRPIR(objectPWEdit1);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.openEditObject(app.nameObject);
+        app.editTopFormOPRPIR(objectPWEdit1);
 
 //        Костыль для того, чтобы срабатывала функция fillSubArticleFirst.
 //        Почему-то нужно открыть и закрыть окно добавления корректировки, и тогда выпадающиий список с номерами подстатей будет открываться
-        driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
-        driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
+        app.driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
+        app.driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
 
-        editSubArticleFirst(article226PZ);
-        editObjectWork(objectWorkEdit);
-        saveEditOPRandCloseWindow();
-        refreshCurrentWindow();
-        logout();
+        app.editSubArticleFirst(article226PZ);
+        app.editObjectWork(objectWorkEdit);
+        app.saveEditOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.logout();
     }
 
     @Test(priority = 3)
     public void testFormationPWbyFKU() {
 
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        pushFomationPW();
-        refreshCurrentWindow();
-        logout();
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.pushFomationPW();
+        app.refreshCurrentWindow();
+        app.logout();
 
     }
 
@@ -189,29 +189,29 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     public void testCreateOPWinStateFormedByFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
 
         //Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
         //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        findNameObject(nameObject);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.findNameObject(app.nameObject);
 
     }
 
@@ -219,128 +219,128 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     public void testEditOPWinStateFormedByFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        openEditObject(nameObject);
-        editTopFormOPRPIR(objectPWEdit1);
-        addAndFillCorrection(correctionEdit);
-        editSubArticleFirst(article226PZ);
-        editObjectWork(objectWorkEdit);
-        saveEditOPRandCloseWindow();
-        refreshCurrentWindow();
-        logout();
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.openEditObject(app.nameObject);
+        app.editTopFormOPRPIR(objectPWEdit1);
+        app.addAndFillCorrection(correctionEdit);
+        app.editSubArticleFirst(article226PZ);
+        app.editObjectWork(objectWorkEdit);
+        app.saveEditOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.logout();
 
     }
 
     @Test(priority = 6)
     public void testDeleteOPWinStateFormedByFKU() {
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        clickDeleteOPW(nameObject);
-        fillDeleteCorrection();
-        refreshCurrentWindow();
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.clickDeleteOPW(app.nameObject);
+        app.fillDeleteCorrection();
+        app.refreshCurrentWindow();
 //        Тут еще надо добавить проверку на отсутствие ОПр в гриде программы работ
-        logout();
+        app.logout();
     }
 
     @Test(priority = 7)
     public void testCreateOPWinStateFormedByFDA() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFDA); //baykal01/Orator16
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFDA); //baykal01/Orator16
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
         //Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
         //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        findNameObject(nameObject);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.findNameObject(app.nameObject);
     }
 
     @Test(priority = 8)
     public void testEditOPWinStateFormedByFDA() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        openEditObject(nameObject);
-        editTopFormOPRPIR(objectPWEdit1);
-        addAndFillCorrection(correctionEdit);
-        editSubArticleFirst(article226PZ);
-        editObjectWork(objectWorkEdit);
-        saveEditOPRandCloseWindow();
-        refreshCurrentWindow();
-        logout();
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.openEditObject(app.nameObject);
+        app.editTopFormOPRPIR(objectPWEdit1);
+        app.addAndFillCorrection(correctionEdit);
+        app.editSubArticleFirst(article226PZ);
+        app.editObjectWork(objectWorkEdit);
+        app.saveEditOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.logout();
 
     }
 
@@ -348,76 +348,76 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     public void testChangeStatusOPWinStateFormedByFDA() {
 
         //Предварительное создание объекта программы работ под учеткой ФКУ (чтобы ОПР был со статусом "Не рассмотрен")
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Принято к утверждению"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Принято к утверждению");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Принят");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Принято к утверждению");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Принят");
 
         //Перевод ОПР из статуса "Принято к утверждению" в статус "Не рассмотрено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Не рассмотрено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Не рассмотрено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Отклонено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Отклонено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Отклонен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Отклонено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Отклонен");
 
         //Перевод ОПР из статуса "Отклонено" в статус "Принято к утверждению"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Принято к утверждению");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Принят");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Принято к утверждению");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Принят");
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Отклонено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Отклонено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Отклонен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Отклонено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Отклонен");
 
         //Перевод ОПР из статуса "Отклонено" в статус "Не рассмотрено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Не рассмотрено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Не рассмотрено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        logout();
+        app.logout();
 
     }
 
     @Test(priority = 10)
     public void testApprovalProgramWorkByFDA() {
 
-        gotoResourse(baseURL);
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        pushApprovalPWbyFDA();
+        app.gotoResourse(baseURL);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.pushApprovalPWbyFDA();
 
     }
 
@@ -425,38 +425,38 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     public void testCreateOPWinStateApproveByFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
         //Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
         //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 
-        findNameObject(nameObject);
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.findNameObject(app.nameObject);
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        pushApprovalPWbyFDA();
+        app.pushApprovalPWbyFDA();
 
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        logout();
+        app.logout();
 
     }
 
@@ -464,52 +464,52 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     public void testEditOPWinStateApproveByFKU() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
         //Редактирование ОПР
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        openEditObject(nameObject);
-        editTopFormOPRPIR(objectPWEdit1);
-        addAndFillCorrection(correctionEdit);
-        editSubArticleFirst(article226PZ);
-        editObjectWork(objectWorkEdit);
-        saveEditOPRandCloseWindow();
-        refreshCurrentWindow();
-        logout();
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.openEditObject(app.nameObject);
+        app.editTopFormOPRPIR(objectPWEdit1);
+        app.addAndFillCorrection(correctionEdit);
+        app.editSubArticleFirst(article226PZ);
+        app.editObjectWork(objectWorkEdit);
+        app.saveEditOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.logout();
 
 
         //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 
-        findNameObject(nameObject);
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.findNameObject(app.nameObject);
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        pushApprovalPWbyFDA();
+        app.pushApprovalPWbyFDA();
 
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        logout();
+        app.logout();
 
 
     }
@@ -517,92 +517,92 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     @Test(priority = 13)
     public void testCreateOPWinStateApproveByFDA() {
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFDA); //baykal01/Orator16
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFDA); //baykal01/Orator16
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
         //Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
 
-        logout();
+        app.logout();
 
 
         //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 
-        findNameObject(nameObject);
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.findNameObject(app.nameObject);
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        pushApprovalPWbyFDA();
+        app.pushApprovalPWbyFDA();
 
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        logout();
+        app.logout();
     }
 
     @Test(priority = 14)
     public void testEditOPWinStateApproveByFDA() {
 
         //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
-        gotoResourse(baseURL);
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
-        logout();
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
+        app.logout();
 
         //Редактирование ОПР
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
-        openEditObject(nameObject);
-        editTopFormOPRPIR(objectPWEdit1);
-        addAndFillCorrection(correctionEdit);
-        editSubArticleFirst(article226PZ);
-        editObjectWork(objectWorkEdit);
-        saveEditOPRandCloseWindow();
-        refreshCurrentWindow();
-        logout();
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
+        app.openEditObject(app.nameObject);
+        app.editTopFormOPRPIR(objectPWEdit1);
+        app.addAndFillCorrection(correctionEdit);
+        app.editSubArticleFirst(article226PZ);
+        app.editObjectWork(objectWorkEdit);
+        app.saveEditOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.logout();
 
 
         //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 
-        findNameObject(nameObject);
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.findNameObject(app.nameObject);
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        pushApprovalPWbyFDA();
+        app.pushApprovalPWbyFDA();
 
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        logout();
+        app.logout();
 
     }
 
@@ -610,66 +610,66 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     public void testChangeStatusOPWinStateApproveByFDA() {
 
         //Предварительное создание объекта программы работ под учеткой ФКУ (чтобы ОПР был со статусом "Не рассмотрен")
-        gotoResourse(baseURL);
-        login(userFKU);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        app.gotoResourse(baseURL);
+        app.login(userFKU);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
 
-        pushCreateOPRandSaveWindow();
-        fillTopFormOPRPIR(objectPWCreate1);
-        addAndFillCorrection(correctionCreate);
-        fillSubArticleFirst(article226RPD);
-        createObjectWork(objectWorkCreate);
-        saveOPRandCloseWindow();
-        refreshCurrentWindow();
-        findNameObject(nameObject);
+        app.pushCreateOPRandSaveWindow();
+        app.fillTopFormOPRPIR(objectPWCreate1);
+        app.addAndFillCorrection(correctionCreate);
+        app.fillSubArticleFirst(article226RPD);
+        app.createObjectWork(objectWorkCreate);
+        app.saveOPRandCloseWindow();
+        app.refreshCurrentWindow();
+        app.findNameObject(app.nameObject);
 
-        logout();
+        app.logout();
 
 
-        login(userFDA);
-        choiceSection("Планирование");
-        choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork);
+        app.login(userFDA);
+        app.choiceSection("Планирование");
+        app.choiceYear(YearProgramWork);
+        app.selectProgramWork(idProgramWork);
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Принято к утверждению"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Принято к утверждению");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Принят");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Принято к утверждению");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Принят");
 
         //Перевод ОПР из статуса "Принято к утверждению" в статус "Не рассмотрено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Не рассмотрено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Не рассмотрено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Отклонено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Отклонено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Отклонен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Отклонено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Отклонен");
 
         //Перевод ОПР из статуса "Отклонено" в статус "Принято к утверждению"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Принято к утверждению");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Принят");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Принято к утверждению");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Принят");
 
         //Перевод ОПР из статуса "Не рассмотрено" в статус "Отклонено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Отклонено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Отклонен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Отклонено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Отклонен");
 
         //Перевод ОПР из статуса "Отклонено" в статус "Не рассмотрено"
-        rightClick(nameObject);
-        selectContextItem("Изменить статус объекта", "Не рассмотрено");
-        refreshCurrentWindow();
-        checkStatusObject(nameObject, "Не рассмотрен");
+        app.rightClick(app.nameObject);
+        app.selectContextItem("Изменить статус объекта", "Не рассмотрено");
+        app.refreshCurrentWindow();
+        app.checkStatusObject(app.nameObject, "Не рассмотрен");
 
-        logout();
+        app.logout();
 
     }
 

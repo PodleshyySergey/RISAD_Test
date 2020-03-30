@@ -365,14 +365,14 @@ public class ApplicationManager {
         return whNow.iterator().next();
     }
 
-    protected void init() {
+    public void init() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
     }
 
-    protected void stop() {
+    public void stop() {
         driver.quit();
     }
 }
