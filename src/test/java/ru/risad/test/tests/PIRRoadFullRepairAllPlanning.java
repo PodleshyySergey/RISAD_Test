@@ -6,10 +6,11 @@ import ru.risad.test.model.*;
 
 public class PIRRoadFullRepairAllPlanning extends TestBase {
 
-    //    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //    ВНЕСЕНИЕ И РЕДАКТИРОВАНИЕ ТЕСТОВЫХ ДАННЫХ
 //    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//    выбор года программы работ (!!! для проходжения теста создания программы работ (testCreateProgramWorkFKU) необходимо указать год, в котором программа работ еще не создавалась)
+//    выбор года программы работ (!!! для проходжения теста создания программы работ (testCreateProgramWorkFKU)
+//    необходимо указать год, в котором программа работ еще не создавалась)
     public String YearProgramWork = "2052";
     //     программа работ - Капремонт дорог ПИР
     String idProgramWork = "PIRRoadFullRepair";
@@ -81,14 +82,15 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
             "555",
             "0 категоря");
 
-//    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//    -------------------------------------------------------------------------------------------------------------
+//    -------------------------------------------------------------------------------------------------------------
 
     @Test
     public void testCreateProgramWorkFKU() {
         gotoResourse(baseURL);
         login(userFKU);
         choiceSection("Планирование");
-        choiceYear(YearProgramWork);                                     //Нужно указывать год, в котором программа работ еще не была создана
+        choiceYear(YearProgramWork);      //Нужно указывать год, в котором программа работ еще не была создана
         selectProgramWork(idProgramWork);
         createProgramWork();
         logout();
@@ -101,12 +103,14 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         login(userFKU);
         choiceSection("Планирование");
         choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR(objectPWCreate1);
 
-//        Костыль для того, чтобы срабатывала функция fillSubArticleFirst. Почему-то нужно открыть и закрыть окно добавления корректировки, и тогда выпадающиий список с номерами подстатей будет открываться
+//        Костыль для того, чтобы срабатывала функция fillSubArticleFirst.
+//        Почему-то нужно открыть и закрыть окно добавления корректировки,
+//        и тогда выпадающиий список с номерами подстатей будет открываться
         driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
         driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
 
@@ -133,7 +137,9 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         fillTopFormOPRPIR(objectPWCreate1);
 //        addAndFillCorrection(correctionCreate);
 
-//        Костыль для того, чтобы срабатывала функция fillSubArticleFirst. Почему-то нужно открыть и закрыть окно добавления корректировки, и тогда выпадающиий список с номерами подстатей будет открываться
+//        Костыль для того, чтобы срабатывала функция fillSubArticleFirst.
+//        Почему-то нужно открыть и закрыть окно добавления корректировки,
+//        и тогда выпадающиий список с номерами подстатей будет открываться
         driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
         driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
 
@@ -151,7 +157,8 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         openEditObject(nameObject);
         editTopFormOPRPIR(objectPWEdit1);
 
-        //        Костыль для того, чтобы срабатывала функция fillSubArticleFirst. Почему-то нужно открыть и закрыть окно добавления корректировки, и тогда выпадающиий список с номерами подстатей будет открываться
+//        Костыль для того, чтобы срабатывала функция fillSubArticleFirst.
+//        Почему-то нужно открыть и закрыть окно добавления корректировки, и тогда выпадающиий список с номерами подстатей будет открываться
         driver.findElement(By.xpath("//div[contains(text(),'Описание корректировки')]/..//button")).click();
         driver.findElement(By.xpath("//button[contains(text(),'Ok')]/../button[contains(text(),'Отмена')]")).click();
 
@@ -184,7 +191,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         login(userFKU);
         choiceSection("Планирование");
         choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
 
         //Создание объекта программы работ
         pushCreateOPRandSaveWindow();
@@ -214,7 +221,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         login(userFKU);
         choiceSection("Планирование");
         choiceYear(YearProgramWork);
-        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - еще одна программа работ, в которой сохраняются данные.
+        selectProgramWork(idProgramWork); // "PIRRoadFullRepair" - программа работ, в которой сохраняются данные.
 //      Создание объекта программы работ
         pushCreateOPRandSaveWindow();
         fillTopFormOPRPIR(objectPWCreate1);
