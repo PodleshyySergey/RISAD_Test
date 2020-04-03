@@ -5,7 +5,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.BrowserType;
 import ru.risad.test.model.*;
 
 import java.util.HashMap;
@@ -22,8 +26,16 @@ public class ApplicationManager {
     JavascriptExecutor js;
 
 
-    public void init() {
-        driver = new ChromeDriver();
+    public void init(String browser) {
+        if (browser.equals(BrowserType.CHROME)) {
+            driver = new ChromeDriver();
+        } else if (browser.equals(BrowserType.FIREFOX)) {
+            driver = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.EDGE)) {
+            driver = new EdgeDriver();
+        } else if (browser.equals(BrowserType.IE)) {
+            driver = new InternetExplorerDriver();
+        }
         userHelper = new UserHelper(driver);
         sessionHelper = new SessionHelper(driver);
         programHelper = new ProgramHelper(driver);
