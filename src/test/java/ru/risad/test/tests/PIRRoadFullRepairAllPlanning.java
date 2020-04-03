@@ -253,6 +253,13 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         app.getSessionHelper().refreshCurrentWindow();
         app.getUserHelper().logout();
 
+        app.getUserHelper().login(userFDA);
+        app.getProgramHelper().choiceSection("Планирование");
+        app.getProgramHelper().choiceYear(YearProgramWork);
+        app.getProgramHelper().selectProgramWork(idProgramWork);
+//        app.getCheckHelper().checkParamsObject(app.getObjectHelper().nameObject,objectPWEdit1,article226PZ,objectWorkEdit,YearProgramWork);
+        app.getUserHelper().logout();
+
     }
 
     @Test(priority = 6)
@@ -288,7 +295,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
     @Test(priority = 7)
     public void testCreateOPWinStateFormedByFDA() {
 
-        //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
+        //Создание ОПР под учетной записью с ролью "пользователь ФДА"
         app.getSessionHelper().gotoResource(baseURL);
         app.getUserHelper().login(userFDA); //baykal01/Orator16
         app.getProgramHelper().choiceSection("Планирование");
@@ -304,9 +311,10 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         app.getObjectHelper().saveOPRandCloseWindow();
         app.getSessionHelper().refreshCurrentWindow();
         app.getCheckHelper().findNameObject(app.getObjectHelper().nameObject);
+        app.getCheckHelper().checkParamsObject(app.getObjectHelper().nameObject,objectPWCreate1,article226RPD,objectWorkCreate,YearProgramWork);
         app.getUserHelper().logout();
 
-        //Проверка созданного ОПР под учетной записью с ролью "пользователь ФДА"
+        //Проверка созданного ОПР под учетной записью с ролью "пользователь ФКУ"
         app.getUserHelper().login(userFKU);
         app.getProgramHelper().choiceSection("Планирование");
         app.getProgramHelper().choiceYear(YearProgramWork);
@@ -460,7 +468,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
 
         app.getSessionHelper().refreshCurrentWindow();
         app.getCheckHelper().checkStatusObject(app.getObjectHelper().nameObject, "Не рассмотрен");
-
+        app.getCheckHelper().checkParamsObject(app.getObjectHelper().nameObject,objectPWCreate1,article226RPD,objectWorkCreate,YearProgramWork);
         app.getUserHelper().logout();
 
     }
@@ -521,7 +529,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
 
     @Test(priority = 13)
     public void testCreateOPWinStateApproveByFDA() {
-        //Создание ОПР под учетной записью с ролью "пользователь ФКУ"
+        //Создание ОПР под учетной записью с ролью "пользователь ФДА"
         app.getSessionHelper().gotoResource(baseURL);
         app.getUserHelper().login(userFDA); //baykal01/Orator16
         app.getProgramHelper().choiceSection("Планирование");
@@ -537,7 +545,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         app.getObjectHelper().saveOPRandCloseWindow();
         app.getSessionHelper().refreshCurrentWindow();
         app.getCheckHelper().findNameObject(app.getObjectHelper().nameObject);
-
+        app.getCheckHelper().checkParamsObject(app.getObjectHelper().nameObject,objectPWCreate1,article226RPD,objectWorkCreate,YearProgramWork);
         app.getUserHelper().logout();
 
 
