@@ -216,6 +216,7 @@ public class PIRRoadFullRepairAllPlanning extends TestBase {
         app.getProgramHelper().choiceYear(YearProgramWork);
         app.getProgramHelper().selectProgramWork(idProgramWork);
         app.getCheckHelper().findNameObject(app.getObjectHelper().nameObject);
+        app.getCheckHelper().checkParamsObject(app.getObjectHelper().nameObject,objectPWCreate1,article226RPD,objectWorkCreate,YearProgramWork);
 
     }
 
