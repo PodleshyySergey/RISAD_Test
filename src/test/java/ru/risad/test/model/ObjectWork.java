@@ -1,8 +1,8 @@
 package ru.risad.test.model;
 
 public class ObjectWork {
-    private final String discoveryFKU;
-    private final String discoveryRegion;
+    private final String openFKU;
+    private final String openRegion;
     private final String selectRoadSection;
     private final String startRoadSectionKM;
     private final String startRoadSectionM;
@@ -13,8 +13,8 @@ public class ObjectWork {
     private final String categoryRoad;
 
     public ObjectWork(String discoveryFKU, String discoveryRegion, String selectRoadSection, String startRoadSectionKM, String startRoadSectionM, String endRoadSectionKM, String endRoadSectionM, String typeAndDateRepairRoad, String valueRoadTraffic, String categoryRoad) {
-        this.discoveryFKU = discoveryFKU;
-        this.discoveryRegion = discoveryRegion;
+        this.openFKU = discoveryFKU;
+        this.openRegion = discoveryRegion;
         this.selectRoadSection = selectRoadSection;
         this.startRoadSectionKM = startRoadSectionKM;
         this.startRoadSectionM = startRoadSectionM;
@@ -25,12 +25,12 @@ public class ObjectWork {
         this.categoryRoad = categoryRoad;
     }
 
-    public String getDiscoveryFKU() {
-        return discoveryFKU;
+    public String getOpenFKU() {
+        return openFKU;
     }
 
-    public String getDiscoveryRegion() {
-        return discoveryRegion;
+    public String getOpenRegion() {
+        return openRegion;
     }
 
     public String getSelectRoadSection() {

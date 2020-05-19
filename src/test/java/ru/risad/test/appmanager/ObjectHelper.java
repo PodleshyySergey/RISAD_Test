@@ -50,8 +50,8 @@ public class ObjectHelper extends HelperBase  {
         click(By.xpath("//span[contains(.,'Объекты работы')]"));
         click(By.id("btn-create-newobj"));
         click(By.xpath("//div[contains(text(),'Наименование дороги')]/..//span[@class='k-widget k-dropdowntree k-dropdowntree-clearable']"));
-        click(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']"));
-        click(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']"));
+        click(By.xpath("//span[contains(.,'" + objectWork.getOpenFKU() + "')]/..//span[@class='k-icon k-i-expand']"));
+        click(By.xpath("//span[contains(.," + objectWork.getOpenRegion() + ")]/..//span[@class='k-icon k-i-expand']"));
         click(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]"));
         type(By.id("tb-start"),objectWork.getStartRoadSectionKM());
         type(By.id("tb-startAdd"),objectWork.getStartRoadSectionM());
@@ -68,8 +68,8 @@ public class ObjectHelper extends HelperBase  {
         click(By.xpath("//span[contains(.,'Объекты работы')]"));
         click(By.xpath("//a[@class='k-button k-button-icontext k-grid-edit']"));
         click(By.xpath("//div[contains(text(),'Наименование дороги')]/..//span[@class='k-widget k-dropdowntree k-dropdowntree-clearable']"));
-        click(By.xpath("//span[contains(.,'" + objectWork.getDiscoveryFKU() + "')]/..//span[@class='k-icon k-i-expand']"));
-        click(By.xpath("//span[contains(.," + objectWork.getDiscoveryRegion() + ")]/..//span[@class='k-icon k-i-expand']"));
+        click(By.xpath("//span[contains(.,'" + objectWork.getOpenFKU() + "')]/..//span[@class='k-icon k-i-expand']"));
+        click(By.xpath("//span[contains(.," + objectWork.getOpenRegion() + ")]/..//span[@class='k-icon k-i-expand']"));
         click(By.xpath("//span[contains(.,'" + objectWork.getSelectRoadSection() + ")]"));
         type(By.id("tb-start"),objectWork.getStartRoadSectionKM());
         type(By.id("tb-startAdd"),objectWork.getStartRoadSectionM());
